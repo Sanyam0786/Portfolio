@@ -46,9 +46,19 @@ body {
     cursor: default;
 }
 
+/* Navbar */
+.backdrop-blur {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+.offcanvas-start {
+    width: 50% !important;
+    /* Custom width to make it half screen */
+}
+
 /* Resume Download CSS */
-.Resume-btn {
-    display: inline-block;
+#Resume-btn {
     padding: 12px 24px;
     background: transparent;
     color: white;
@@ -56,17 +66,30 @@ body {
     border: 2px solid #0294bd;
     border-radius: 8px;
     text-decoration: none;
-    transition: border-image 0.4s ease, color 0.3s ease;
-}
-
-.Resume-btn:hover {
-    border-color: cyan;
 }
 
 /* Main Section */
 #Main {
     background: linear-gradient(120deg, #1e1e2f, #232526);
     color: white;
+}
+
+#about,
+#skills,
+#projects,
+#contact {
+    padding-top: 5rem;
+}
+
+#section-name {
+    font-size: 50px;
+}
+
+/* Profile Image CSS */
+#ProfileImg {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
 }
 
 /* Skills Slider CSS */
@@ -108,107 +131,22 @@ body {
     }
 }
 
-/* Projects CSS */
-
-
-/* Responsive Settings
-        @media (max-width: 1400px) {
-            .slider-track {
-                gap: 20px;
-            }
-
-            .card {
-                flex: 0 0 280px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .slider-track {
-                gap: 15px;
-            }
-
-            .card {
-                flex: 0 0 250px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .slider-track {
-                gap: 15px;
-            }
-
-            .card {
-                flex: 0 0 220px;
-            }
-
-            .navbar-nav {
-                text-align: center;
-            }
-
-            .Resume-btn {
-                padding: 10px 20px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .stars {
-                height: 400px;
-            }
-
-            .slider-track {
-                flex-wrap: nowrap;
-                animation: none;
-                overflow-x: auto;
-            }
-
-            .card {
-                flex: 0 0 200px;
-            }
-
-            .d-flex.flex-row {
-                flex-direction: column !important;
-            }
-
-            #about img {
-                margin: 0;
-                margin-bottom: 20px;
-                align-items: center;
-            }
-
-            #about h3 {
-                font-size: 1.5rem;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 2rem !important;
-            }
-
-            .Resume-btn {
-                font-size: 0.9rem;
-                padding: 8px 16px;
-            }
-
-            #about img {
-                width: 250px !important;
-                height: 250px !important;
-            }
-
-            #about h3 {
-                padding: 0 15px;
-            }
-
-            .navbar-toggler {
-                margin-right: 10px;
-            }
-
-            .slider-track {
-                gap: 10px;
-            }
-
-            .card {
-                flex: 0 0 180px;
-            }
-        } */
+/* Responsive CSS */
+@media (max-width: 1000px) {
+    #ProfileImg {
+        width: 300px;
+        height: 300px;
+    }
+    
+    #section-name {
+        font-size: 40px;
+    }
+    
+    .card h5 {
+        font-size: 16px;
+    }
+    
+    .slider-track {
+        gap: 15px;
+    }
+}

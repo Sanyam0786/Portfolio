@@ -9,18 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
-        integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
-        crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="bg-dark">
     <!-- Star Background Effect -->
     <div class="stars" id="stars-container">
         <div id="home" class="container h-100 d-flex justify-content-center align-items-center z-1 position-relative">
@@ -29,105 +20,141 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <!-- <a class="navbar-brand" href="#home">Portfolio</a> -->
-            <a href="assets/SANYAM_MUJAVADIA.pdf" download class="Resume-btn">
-                <i class="fa-solid fa-download p-2"></i> Resume</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse mx-3" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skills">Skills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg bg-dark bg-opacity-75 backdrop-blur sticky-top px-4">
+        <a class="collapse navbar-collapse navbar-brand text-light" href="#home">Sanyam Mujavadia</a>
+        <button class="navbar-toggler text-white border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#mobileMenu">
+            <i class="fas fa-bars fa-lg"></i>
+        </button>
+
+        <!-- Desktop Menu -->
+        <div class="collapse navbar-collapse justify-content-end d-none d-lg-flex">
+            <ul class="navbar-nav me-3">
+                <li class="nav-item"><a class="nav-link text-light" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#contact">Contact</a></li>
+            </ul>
         </div>
+        <a href="resume.pdf" download class="btn btn-primary" id="Resume-btn">
+            <i class="fa-solid fa-download me-1"></i> Resume
+        </a>
     </nav>
+
+    <!-- Navbar Offcanvas Menu (Mobile) -->
+    <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-light fw-bold">Sanyam Mujavadia</h5>
+            <button type="button" class="btn-close btn-close-white border-0 shadow-none"
+                data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item"><a class="nav-link text-light" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="text-center">
+            <p class="mb-4">
+                <a href="https://github.com/Sanyam0786/" class="text-decoration-none text-black me-2 p-2">
+                    <i class="fab fa-github fa-2x bg-white rounded p-2"></i></a>
+                <a href="https://www.linkedin.com/in/sanyam-mujavadia-88819328a/"
+                    class="text-decoration-none text-black me-2 p-2">
+                    <i class="fab fa-linkedin fa-2x bg-white rounded p-2"></i></a>
+            </p>
+            <p class="text-light small">&copy; 2025 Sanyam.</p>
+            <p class="text-light small">All rights reserved.</p>
+        </div>
+    </div>
 
     <!-- Main Section -->
     <div id="Main">
         <!-- About Section -->
-        <div id="about">
-            <div class="d-flex justify-content-center align-items-center">
+        <div id="about" class="container">
+            <!-- Section Title -->
+            <div class="text-center">
                 <h1 class="fw-bold text-decoration-underline link-underline-success link-offset-2 mt-2"
-                    style="font-size: 50px;"> About </h1>
+                    id="section-name"> About </h1>
             </div>
-            <div class="d-flex justify-content-between align-items-center flex-row">
-                <div class="mt-5 mx-5 d-flex justify-content-center align-items-center gap-5 flex-row">
-                    <img src="imgs/ProfileImg.jpg" alt="Profile Image" class="border rounded-circle object-fit-cover"
-                        style="width: 400px; height: 400px; margin-left: 100px;">
-                    <h3 class="mx-5 text-center text-wrap">Hi, I'm Sanyam Mujavadia, a passionate Computer Science
-                        Engineering student with a strong interest in Front-end development and UI/UX design. I enjoy
-                        turning ideas into responsive, interactive websites. Currently building my skills in HTML, CSS,
-                        JavaScript, and React, I'm always looking to learn and grow through real-world projects and
-                        collaborations.</h3>
+
+            <!-- Responsive Row -->
+            <div class="row align-items-center mt-5">
+                <!-- Image Column -->
+                <div class="col-12 col-md-5 d-flex justify-content-center mb-4 mb-md-0">
+                    <img src="imgs/ProfileImg.jpg" alt="Profile Image" class="rounded-circle img-fluid" id="ProfileImg">
+                </div>
+
+                <!-- Text Column -->
+                <div class="col-12 col-md-7">
+                    <h3 class="text-center text-md-start px-3 px-md-5">
+                        Hi, I'm <strong class="text-danger">Sanyam Mujavadia</strong>, a passionate Computer Science
+                        Engineering student
+                        with a strong interest in Front-end development and UI/UX design. I enjoy turning ideas into
+                        responsive, interactive websites. Currently building my skills in HTML, CSS, JavaScript, and
+                        React, I'm always looking to learn and grow through real-world projects and collaborations.
+                    </h3>
                 </div>
             </div>
         </div>
 
         <!-- Skills Section -->
         <div id="skills">
-            <div class="mt-5">
-                <div class="d-flex justify-content-center align-items-center ">
-                    <h1 class="fw-bold text-decoration-underline link-underline-success link-offset-2 mt-2"
-                        style="font-size: 50px;"> Skills </h1>
-                </div>
-                <div class="container-fluid slider-container">
-                    <div class="slider-track" id="sliderTrack">
-                        <div class="card">
-                            <img src="/Porfolio/imgs/Html.png" class="card-img-top" alt="HTML" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">HTML</h5>
-                            </div>
+            <div class="text-center">
+                <h1 class="fw-bold text-decoration-underline link-underline-success link-offset-2 mt-2"
+                    id="section-name"> Skills </h1>
+            </div>
+            <div class="container-fluid slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="card">
+                        <img src="/Porfolio/imgs/Html.png" class="card-img-top" alt="HTML" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">HTML</h5>
                         </div>
-                        <div class="card">
-                            <img src="/Porfolio/imgs/CSS.png" class="card-img-top" alt="CSS" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">CSS</h5>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <img src="/Porfolio/imgs/CSS.png" class="card-img-top" alt="CSS" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">CSS</h5>
                         </div>
-                        <div class="card">
-                            <img src="/Porfolio/imgs/Js.png" class="card-img-top" alt="JAVASCRIPT" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">JAVASCRIPT</h5>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <img src="/Porfolio/imgs/Js.png" class="card-img-top" alt="JAVASCRIPT" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">JAVASCRIPT</h5>
                         </div>
-                        <div class="card">
-                            <img src="/Porfolio/imgs/React.png" class="card-img-top" alt="REACT" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">REACT</h5>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <img src="/Porfolio/imgs/Bootstrap.png" class="card-img-top" alt="BOOTSTRAP-CSS" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">BOOTSTRAP-CSS</h5>
                         </div>
-                        <div class="card">
-                            <img src="/Porfolio/imgs/Nextjs.png" class="card-img-top" alt="NEXT.JS" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">NEXT.JS</h5>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <img src="/Porfolio/imgs/Tailwind.png" class="card-img-top" alt="TAILWIND-CSS" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">TAILWIND-CSS</h5>
                         </div>
-                        <div class="card">
-                            <img src="/Porfolio/imgs/MongoDB.png" class="card-img-top" alt="MONGODB" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">MONGODB</h5>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <img src="/Porfolio/imgs/React.png" class="card-img-top" alt="REACT-JS" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">REACT-JS</h5>
                         </div>
-                        <div class="card">
-                            <img src="/Porfolio/imgs/Nodejs.png" class="card-img-top" alt="NODE.JS" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">NODE.JS</h5>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <img src="/Porfolio/imgs/MongoDB.png" class="card-img-top" alt="MONGODB" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">MONGODB</h5>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/Porfolio/imgs/Nodejs.png" class="card-img-top" alt="NODE-JS" />
+                        <div class="card-body mt-2 text-center">
+                            <h5 class="card-title">NODE-JS</h5>
                         </div>
                     </div>
                 </div>
@@ -135,50 +162,196 @@
         </div>
 
         <!-- Projects Section -->
-        <div id="projects">
-            <div class="mt-5">
-                <div class="d-flex justify-content-center align-items-center ">
-                    <h1 class="fw-bold text-decoration-underline link-underline-success link-offset-2 mt-2"
-                        style="font-size: 50px;"> Projects </h1>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div id="carouselExampleIndicators" class="carousel slide w-100">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
+        <div id="projects" class="container mt-5">
+            <!-- Section Title -->
+            <div class="text-center">
+                <h1 class="fw-bold text-decoration-underline link-underline-success link-offset-2 mt-2"
+                    id="section-name"> Projects </h1>
+            </div>
+
+            <!-- Project 1 -->
+            <div class="row align-items-center mt-5">
+                <div class="col-md-6 mb-4">
+                    <div class="bg-white p-2 rounded shadow">
+                        <div id="carouselProject1" class="carousel slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselProject1" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselProject1" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselProject1" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="/Porfolio/imgs/Screenshot (62).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/Porfolio/imgs/Screenshot (63).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/Porfolio/imgs/Screenshot (65).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot 3">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProject1"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselProject1"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="/Porfolio/imgs/Screenshot (62).png" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/Porfolio/imgs/Screenshot (63).png" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/Porfolio/imgs/Screenshot (65).png" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    <div>
-                        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat et, dolorem praesentium nostrum maiores sapiente totam ab tenetur quia nobis quas voluptates soluta non veritatis a maxime voluptate asperiores itaque?</h4>
                     </div>
                 </div>
 
+                <!-- Description -->
+                <div class="col-md-6">
+                    <div class="ps-md-4">
+                        <h2 class="fw-bold">DOCUMENT EASE</h2>
+                        <p class="mt-3">Document Ease simplifies document creation and collaboration with smart
+                            templates, real-time editing, and easy export options.</p>
+                        <a href="#" class="btn btn-success mt-3">View More</a>
+                    </div>
+                </div>
             </div>
+
+            <!-- Project 2 -->
+            <div class="row align-items-center mt-5 flex-md-row-reverse">
+                <div class="col-md-6 mb-4">
+                    <div class="bg-white p-2 rounded shadow">
+                        <div id="carouselProject2" class="carousel slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselProject2" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselProject2" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselProject2" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="/Porfolio/imgs/Screenshot (62).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot A">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/Porfolio/imgs/Screenshot (63).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot B">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/Porfolio/imgs/Screenshot (65).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot C">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProject2"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselProject2"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-md-6">
+                    <div class="pe-md-4">
+                        <h2 class="fw-bold">TASK TRACKER</h2>
+                        <p class="mt-3">Task Tracker helps you stay organized by allowing you to create, prioritize, and
+                            schedule tasks with deadline alerts and progress tracking.</p>
+                        <a href="#" class="btn btn-success mt-3">View More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="row align-items-center mt-5">
+                <div class="col-md-6 mb-4">
+                    <div class="bg-white p-2 rounded shadow">
+                        <div id="carouselProject1" class="carousel slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselProject1" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselProject1" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselProject1" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="/Porfolio/imgs/Screenshot (62).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/Porfolio/imgs/Screenshot (63).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/Porfolio/imgs/Screenshot (65).png" class="d-block w-100 img-fluid"
+                                        alt="Project Screenshot 3">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProject1"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselProject1"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-md-6">
+                    <div class="ps-md-4">
+                        <h2 class="fw-bold">DOCUMENT EASE</h2>
+                        <p class="mt-3">Document Ease simplifies document creation and collaboration with smart
+                            templates, real-time editing, and easy export options.</p>
+                        <a href="#" class="btn btn-success mt-3">View More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact">
+            <div class="text-center">
+                <h1 class="fw-bold text-decoration-underline link-underline-success link-offset-2 mt-2"
+                    id="section-name"> Contact </h1>
+            </div>
+            <!-- Contact Form -->
+            <section id="contact" class="container py-5">
+                <form id="contactForm" class="mx-auto" style="max-width: 600px;">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Your message here..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+            </section>
         </div>
     </div>
 
@@ -196,6 +369,15 @@
         </p>
     </footer>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
+        integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
