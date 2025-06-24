@@ -1,4 +1,4 @@
-// JavaScript for Star Effect
+// Script for Star Effect
 const starsContainer = document.getElementById('stars-container');
 for (let i = 0; i < 80; i++) {
     const star = document.createElement('div');  // Create a <div>
@@ -27,7 +27,7 @@ document.addEventListener('click', (e) => {
 });
 
 
-// Skills Slider JavaScript
+// Skills Slider Script
 const track = document.getElementById("sliderTrack");
 const cardWidth = 320; // 300px card + 20px margin-right
 const animationDuration = 7000; // match 14s from CSS
@@ -52,3 +52,18 @@ setInterval(() => {
         track.style.animation = "scroll 7s linear infinite";
     }, 0); // Short delay after shifting
 }, animationDuration);
+
+// Form Validation Script
+(function () {
+    'use strict';
+    const form = document.getElementById('contactForm');
+
+    form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+})();
