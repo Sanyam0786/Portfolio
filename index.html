@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
+    <link rel="icon" href="imgs/Logo.png" />
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -218,19 +219,59 @@
                     <!-- Skill Card 11 -->
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="card h-100 text-center shadow-sm">
-                            <img src="imgs/Expressjs.png" class="card-img-top p-3" alt="Express JS">
+                            <img src="imgs/Canva.png" class="card-img-top p-3" alt="Canva">
                             <div class="card-body">
-                                <p class="card-text fw-semibold">Express JS</p>
+                                <p class="card-text fw-semibold">Canva</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill Card 12 -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card h-100 text-center shadow-sm">
+                            <img src="imgs/Java.png" class="card-img-top p-3" alt="Java">
+                            <div class="card-body">
+                                <p class="card-text fw-semibold">Java</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Skill Card 12 -->
+                    <!-- Skill Card 13 -->
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="card h-100 text-center shadow-sm">
-                            <img src="imgs/Canva.png" class="card-img-top p-3" alt="MySQL">
+                            <img src="imgs/C.png" class="card-img-top p-3" alt="C">
                             <div class="card-body">
-                                <p class="card-text fw-semibold">Canva</p>
+                                <p class="card-text fw-semibold">C</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 14 -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card h-100 text-center shadow-sm">
+                            <img src="imgs/C++.png" class="card-img-top p-3" alt="C++">
+                            <div class="card-body">
+                                <p class="card-text fw-semibold">C++</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 15 -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card h-100 text-center shadow-sm">
+                            <img src="imgs/Python.png" class="card-img-top p-3" alt="Python">
+                            <div class="card-body">
+                                <p class="card-text fw-semibold">Python</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 16 -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card h-100 text-center shadow-sm">
+                            <img src="imgs/MySQL.png" class="card-img-top p-3" alt="MySQL">
+                            <div class="card-body">
+                                <p class="card-text fw-semibold">MySQL</p>
                             </div>
                         </div>
                     </div>
@@ -300,7 +341,8 @@
                             an intuitive interface and a focus on productivity, DocEase is ideal for students,
                             professionals, and teams who value clarity and convenience in handling documentation
                             workflows.</p>
-                        <a href="#" class="btn btn-success mt-3">View More</a>
+                        <a href="https://github.com/Sanyam0786/IDT-2-Project/tree/master/DocEase"
+                            class="btn btn-success mt-3">View More</a>
                     </div>
                 </div>
             </div>
@@ -357,7 +399,8 @@
                             Home, Story, Menu, Our Update, Contact, and Reservation — all crafted with a focus on
                             user-friendly navigation and clean design. It serves as an ideal example of modern UI/UX
                             practices applied to a food business website.</p>
-                        <a href="#" class="btn btn-success mt-3">View More</a>
+                        <a href="https://github.com/Sanyam0786/Crispy-Kitchen-Clone/tree/master/Crispy"
+                            class="btn btn-success mt-3">View More</a>
                     </div>
                 </div>
             </div>
@@ -414,7 +457,8 @@
                             UI/UX design for multiple game stages, user interactions, and a responsive layout. This
                             design showcases my ability to create immersive user experiences and can be developed using
                             HTML, CSS, and JavaScript for real-world implementation.</p>
-                        <a href="#" class="btn btn-success mt-3">View More</a>
+                        <a href="https://www.figma.com/design/A6O1YKj6dhN0b6naEScVSx/Escape-Room?t=OD7P8qcfZoZgAVEt-1"
+                            class="btn btn-success mt-3">View More</a>
                     </div>
                 </div>
             </div>
@@ -525,18 +569,20 @@
             </div>
             <!-- Contact Form -->
             <div id="contact" class="container py-5">
-                <form id="contactForm" class="mx-auto needs-validation" style="max-width: 600px;" novalidate>
+                <form id="contactForm" class="mx-auto needs-validation" action="https://formspree.io/f/mrbkozgw"
+                    method="post" style="max-width: 600px;" novalidate>
                     <!-- Full Name -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Enter your full name"
+                            required>
                         <div class="invalid-feedback">Please enter your name.</div>
                     </div>
 
                     <!-- Phone Number -->
                     <div class="mb-3">
                         <label for="phoneNo" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="phoneNo"
+                        <input type="tel" name="phoneNo" class="form-control" id="phoneNo"
                             placeholder="Enter your phone number (+91 1234567890)"
                             pattern="^(\+?\d{1,4}[\s\-]?)?\d{10}$" required>
                         <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
@@ -545,7 +591,7 @@
                     <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email"
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email"
                             pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
                         <div class="invalid-feedback">Please enter a valid email address.</div>
                     </div>
@@ -553,8 +599,8 @@
                     <!-- Message -->
                     <div class="mb-3">
                         <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="5" placeholder="Your message here..."
-                            required></textarea>
+                        <textarea class="form-control" name="message" id="message" rows="5"
+                            placeholder="Your message here..." required></textarea>
                         <div class="invalid-feedback">Please enter a message.</div>
                     </div>
 
@@ -563,6 +609,30 @@
                 </form>
             </div>
         </div>
+
+        <!-- Success Modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-white rounded-4 shadow-lg border-0">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title text-center" id="successModalLabel">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i> Success
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body fs-5 text-center">
+                        Your form has been <strong>successfully submitted</strong>!
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center">
+                        <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <!-- Footer Section -->

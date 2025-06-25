@@ -54,16 +54,38 @@ setInterval(() => {
 }, animationDuration);
 
 // Form Validation Script
-(function () {
-    'use strict';
-    const form = document.getElementById('contactForm');
+const form = document.getElementById("contactForm");
 
-    form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
+form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
+    }
+
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            // Reset the form and show the success modal
+            form.reset();
+            form.classList.remove("was-validated");
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        } else {
+            alert("There was a problem submitting your form.");
         }
-
-        form.classList.add('was-validated');
-    }, false);
-})();
+    } catch (error) {
+        console.error("Error:", error);
+        alert("There was an error. Please try again later.");
+    }
+});
