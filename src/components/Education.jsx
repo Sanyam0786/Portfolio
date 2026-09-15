@@ -1,0 +1,50 @@
+import React from 'react'
+import { education } from '../../data/education'
+import { motion } from 'framer-motion'
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12 } }
+}
+
+const item = {
+  hidden: { y: 14, opacity: 0 },
+  show: { y: 0, opacity: 1, transition: { duration: 0.56, ease: [0.2, 0.9, 0.2, 1] } }
+}
+
+const titleVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.2, 0.9, 0.2, 1] } }
+}
+
+const subtitleVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.8, delay: 0.2 } }
+}
+
+export default function Education() {
+  return (
+    <section className="py-20 bg-slate-50 dark:bg-slate-900" aria-label="education" id="education">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={titleVariants}>
+          <h3 className="section-title heading-gradient">Education</h3>
+        </motion.div>
+        <motion.div className="fancy-underline mt-3" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} style={{ transformOrigin: 'left' }} />
+        <motion.p className="section-subtitle" variants={subtitleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Academic background and focused coursework.</motion.p>
+
+        <motion.div className="timeline" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} variants={container}>
+          {education.map((ed, idx) => (
+            <motion.div key={ed.school} className="timeline-item" variants={item}>
+              {/* <div className="timeline-dot" aria-hidden /> */}
+              <motion.div className="timeline-card darkGlass" whileHover={{ scale: 1.02 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }}>
+                <div className="font-semibold text-white">{ed.degree}</div>
+                <div className="text-sm text-slate-200 opacity-90">{ed.school} • {ed.period}</div>
+                <p className="mt-2 text-sm text-slate-200/90">{ed.notes}</p>
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
