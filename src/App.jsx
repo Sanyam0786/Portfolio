@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Home from './pages/Home'
 import ProjectDetail from './pages/ProjectDetail'
@@ -29,6 +29,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
+        {/* Redirect any other path to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </motion.div>
   )

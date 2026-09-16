@@ -1,20 +1,14 @@
 export const education = [
   {
-    school: "R.K University",
-    degree: "B.Tech Computer Engineering",
-    period: "2022 — 2026",
+    school: "Silver Oak University",
+    degree: "B.Tech Computer Science Engineering",
+    period: "2023 — 2027",
     notes: "Focused on coding, software development, and building practical technical skills.",
   },
   {
-    school: "DAV College",
-    degree: "+2 (Science)",
-    period: "2020 — 2022",
-    notes: "Studied Science stream with Biology.",
-  },
-  {
-    school: "Kamyak School",
-    degree: "Secondary School",
-    period: "2006 — 2020",
-    notes: "Completed Nursery to 10th with a strong foundation in basic academics and overall learning.",
+    school: "Sankalp International School",
+    degree: "Higher Secondary & Secondary Education",
+    period: "2021 — 2023",
+    notes: "Completed Secondary School (10th) in 2021 and Higher Secondary School (12th) in 2023.",
   },
 ];

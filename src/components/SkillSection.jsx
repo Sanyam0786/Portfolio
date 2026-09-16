@@ -9,33 +9,33 @@ const SkillsSection = () => {
 
   // Duplicate skills for infinite scroll effect
   const displaySkills = [...skills, ...skills]
-skills
+
   useEffect(() => {
-  const interval = setInterval(() => {
-    if (scrollContainerRef.current && !isPaused) {
-      const container = scrollContainerRef.current
+    const interval = setInterval(() => {
+      if (scrollContainerRef.current && !isPaused) {
+        const container = scrollContainerRef.current
 
-      setScrollPosition((prev) => {
-        const halfWidth = container.scrollWidth / 2
-        let newPosition = prev + 1.2
+        setScrollPosition((prev) => {
+          const halfWidth = container.scrollWidth / 2
+          let newPosition = prev + 1.2
 
-        if (newPosition >= halfWidth) {
-          newPosition = newPosition - halfWidth 
-        }
+          if (newPosition >= halfWidth) {
+            newPosition = newPosition - halfWidth
+          }
 
-        return newPosition
-      })
+          return newPosition
+        })
+      }
+    }, 20)
+
+    return () => clearInterval(interval)
+  }, [isPaused])
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.style.transform = `translateX(-${scrollPosition}px)`
     }
-  }, 20) // smoother animation
-
-  return () => clearInterval(interval)
-}, [isPaused])
-
-  useEffect(() => {
-  if (scrollContainerRef.current) {
-    scrollContainerRef.current.style.transform = `translateX(-${scrollPosition}px)`
-  }
-}, [scrollPosition])
+  }, [scrollPosition])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -51,7 +51,7 @@ skills
   }
 
   return (
-    <section className="py-20 bg-white dark:bg-slate-900" aria-label="skills" id="skills">
+    <section className="py-20 bg-white dark:bg-slate-900 transition-colors duration-300" aria-label="skills" id="skills">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -72,13 +72,13 @@ skills
             className="relative overflow-hidden"
           >
             {/* Gradient overlays for fade effect */}
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white dark:from-slate-900 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white dark:from-slate-900 to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-white dark:from-slate-900 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-white dark:from-slate-900 to-transparent z-10 pointer-events-none" />
 
             {/* Scrollable Container */}
             <div
               ref={scrollContainerRef}
-              className="flex gap-4 will-change-transform pt-8"
+              className="flex gap-4 will-change-transform pt-6 pb-2"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
@@ -91,7 +91,7 @@ skills
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   className="flex-shrink-0"
                 >
-                  <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-300 min-w-[180px] sm:min-w-[200px] h-full flex flex-col items-center justify-center gap-3 group cursor-pointer">
+                  <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-lg dark:hover:shadow-slate-950/40 transition-all duration-300 min-w-[180px] sm:min-w-[200px] h-full flex flex-col items-center justify-center gap-3 group cursor-pointer">
                     {/* Icon */}
                     <div className="text-4xl group-hover:scale-110 transition-transform duration-300">
                       <img
@@ -108,16 +108,15 @@ skills
                     </h3>
 
                     {/* Level Badge */}
-                    <span className={`text-xs font-medium px-3 py-1 rounded-full ${
-                      skill.level === 'Expert'
+                    <span className={`text-xs font-medium px-3 py-1 rounded-full ${skill.level === 'Expert'
                         ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900'
                         : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
-                    }`}>
+                      }`}>
                       {skill.level}
                     </span>
 
                     {/* Animated underline on hover */}
-                    <div className="w-6 h-0.5 bg-slate-600 rounded-full group-hover:w-8 transition-all duration-300" />
+                    <div className="w-6 h-0.5 bg-indigo-500 dark:bg-indigo-400 rounded-full group-hover:w-10 transition-all duration-300" />
                   </div>
                 </motion.div>
               ))}

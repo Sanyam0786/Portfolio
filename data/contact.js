@@ -1,5 +1,9 @@
 export const contact = {
-  email: "youremail@example.com",
-  linkedin: "https://www.linkedin.com/in/yourprofile",
-  whatsapp: "https://wa.me/1234567890",
+  name: "Sanyam Mujavadia",
+  role: "React Native Specialist",
+  email: "sanyammj786@gmail.com",
+  linkedin: "https://www.linkedin.com/in/sanyam-mujavadia-88819328a/",
+  whatsapp: "https://wa.me/917861961399",
+  github: "https://github.com/Sanyam0786",
+  formspree: "https://formspree.io/f/mrbkozgw",
 };

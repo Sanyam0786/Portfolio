@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { projects } from '../../data/projects'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Users, Zap, Calendar, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Users, Zap, Calendar, ExternalLink, FolderX } from 'lucide-react'
 import { FiGithub } from 'react-icons/fi'
 
 const containerVariants = {
@@ -23,14 +23,51 @@ export default function ProjectDetail() {
   const project = projects.find(p => p.id === id)
 
   if (!project) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Project not found</h2>
-        <Link to="/" className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors">
-          <ArrowLeft size={18} />
-          Back to Portfolio
-        </Link>
-      </div>
+    <div className="min-h-screen flex items-center justify-center p-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.2, 0.9, 0.2, 1] }}
+        className="glass rounded-3xl p-8 sm:p-12 shadow-2xl max-w-md w-full text-center relative overflow-hidden border border-white/50 dark:border-slate-700/60"
+      >
+        {/* Ambient background glows */}
+        <div className="absolute -top-16 -right-16 w-36 h-36 bg-indigo-500/20 dark:bg-indigo-500/30 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-16 -left-16 w-36 h-36 bg-purple-500/20 dark:bg-purple-500/30 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Animated 404 Icon Badge */}
+        <motion.div
+          initial={{ rotate: -12, scale: 0.8 }}
+          animate={{ rotate: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+          className="w-16 h-16 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/50 flex items-center justify-center mx-auto mb-5 text-indigo-600 dark:text-indigo-400 shadow-inner"
+        >
+          <FolderX className="w-8 h-8" />
+        </motion.div>
+
+        {/* 404 pill badge */}
+        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100/80 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 mb-3 inline-block tracking-wide">
+          404 • Not Found
+        </span>
+
+        {/* Heading & Description */}
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight mb-2.5">
+          Project Not Found
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs mx-auto mb-8 leading-relaxed">
+          The project you're looking for doesn't exist or may have been moved.
+        </p>
+
+        {/* Designed CTA button with hover effects */}
+        <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.96 }}>
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-semibold text-sm shadow-lg hover:shadow-xl dark:hover:bg-white transition-all duration-300 group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Portfolio</span>
+          </Link>
+        </motion.div>
+      </motion.div>
     </div>
   )
 
@@ -306,80 +343,80 @@ export default function ProjectDetail() {
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Explore Project</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {project.demo?.web && (
-              <motion.a
-                href={project.demo.web}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-3 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
-              >
-                <ExternalLink size={20} />
-                <div>
-                  <p className="font-semibold">Live Demo</p>
-                  <p className="text-sm text-slate-400">View the project online</p>
-                </div>
-              </motion.a>
-            )}
+                <motion.a
+                  href={project.demo.web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-3 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
+                >
+                  <ExternalLink size={20} />
+                  <div>
+                    <p className="font-semibold">Live Demo</p>
+                    <p className="text-sm text-slate-400">View the project online</p>
+                  </div>
+                </motion.a>
+              )}
 
-            {/* App Store */}
-            {project.demo?.store?.ios && (
-              <motion.a
-                href={project.demo.store.ios}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-4 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
-              >
-                {/* Apple icon */}
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 opacity-90">
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.18 1.35-2.16 3.99.03 3.16 2.63 4.2 2.66 4.21l-.05.13c-.2.63-.52 1.56-1.2 2.34M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                </svg>
-                <div>
-                  <p className="text-xs text-slate-400 leading-none mb-0.5">Download on the</p>
-                  <p className="font-semibold text-base leading-tight">App Store</p>
-                </div>
-              </motion.a>
-            )}
+              {/* App Store */}
+              {project.demo?.store?.ios && (
+                <motion.a
+                  href={project.demo.store.ios}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-4 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
+                >
+                  {/* Apple icon */}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 opacity-90">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.18 1.35-2.16 3.99.03 3.16 2.63 4.2 2.66 4.21l-.05.13c-.2.63-.52 1.56-1.2 2.34M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                  </svg>
+                  <div>
+                    <p className="text-xs text-slate-400 leading-none mb-0.5">Download on the</p>
+                    <p className="font-semibold text-base leading-tight">App Store</p>
+                  </div>
+                </motion.a>
+              )}
 
-            {/* Play Store */}
-            {project.demo?.store?.android && (
-              <motion.a
-                href={project.demo.store.android}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-4 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
-              >
-                {/* Google Play icon */}
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 opacity-90">
-                  <path d="M3.18 23.76c.3.17.63.24.97.2l.1-.04 11.35-6.55-2.47-2.47-9.95 8.86zM.41 1.2C.16 1.57 0 2.08 0 2.73v18.54c0 .65.16 1.16.41 1.53l.08.08 10.39-10.39v-.24L.49 1.12l-.08.08zM20.13 9.53l-2.54-1.46-2.77 2.77 2.77 2.77 2.56-1.48c.73-.42.73-1.19-.02-1.6zM4.15.28l11.35 6.55-2.47 2.47L3.08.44l.1-.04c.34-.04.67.03.97.2v-.32z"/>
-                </svg>
-                <div>
-                  <p className="text-xs text-slate-400 leading-none mb-0.5">Get it on</p>
-                  <p className="font-semibold text-base leading-tight">Google Play</p>
-                </div>
-              </motion.a>
-            )}
+              {/* Play Store */}
+              {project.demo?.store?.android && (
+                <motion.a
+                  href={project.demo.store.android}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-4 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
+                >
+                  {/* Google Play icon */}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 opacity-90">
+                    <path d="M3.18 23.76c.3.17.63.24.97.2l.1-.04 11.35-6.55-2.47-2.47-9.95 8.86zM.41 1.2C.16 1.57 0 2.08 0 2.73v18.54c0 .65.16 1.16.41 1.53l.08.08 10.39-10.39v-.24L.49 1.12l-.08.08zM20.13 9.53l-2.54-1.46-2.77 2.77 2.77 2.77 2.56-1.48c.73-.42.73-1.19-.02-1.6zM4.15.28l11.35 6.55-2.47 2.47L3.08.44l.1-.04c.34-.04.67.03.97.2v-.32z" />
+                  </svg>
+                  <div>
+                    <p className="text-xs text-slate-400 leading-none mb-0.5">Get it on</p>
+                    <p className="font-semibold text-base leading-tight">Google Play</p>
+                  </div>
+                </motion.a>
+              )}
 
-            {project.github && (
-              <motion.a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-3 p-4 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors"
-              >
-                <FiGithub size={20} />
-                <div>
-                  <p className="font-semibold">Source Code</p>
-                  <p className="text-sm text-slate-600">View on GitHub</p>
-                </div>
-              </motion.a>
-            )}
+              {project.github && (
+                <motion.a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-3 p-4 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors"
+                >
+                  <FiGithub size={20} />
+                  <div>
+                    <p className="font-semibold">Source Code</p>
+                    <p className="text-sm text-slate-600">View on GitHub</p>
+                  </div>
+                </motion.a>
+              )}
 
             </div>
           </motion.div>
