@@ -10,7 +10,6 @@ export const skills = [
   { name: "Firebase", icon: icons.ic_firebase, level: "Advanced" },
   { name: "Tailwind CSS", icon: icons.ic_tailwind, level: "Advanced" },
   { name: "Node.js", icon: icons.ic_nodejs, level: "Advanced" },
-  { name: "MongoDB", icon: icons.ic_mongodb, level: "Advanced" },
   { name: "Express", icon: icons.ic_express, level: "Advanced" },
   { name: "Redux", icon: icons.ic_redux, level: "Expert" },
   { name: "Git", icon: icons.ic_git, level: "Expert" },

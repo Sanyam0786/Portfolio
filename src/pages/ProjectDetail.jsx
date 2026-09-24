@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { projects } from '../../data/projects'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Users, Zap, Calendar, ExternalLink, FolderX } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft, Users, Zap, Calendar, ExternalLink, FolderX, Sun, Moon } from 'lucide-react'
 import { FiGithub } from 'react-icons/fi'
+import { useTheme } from '../context/ThemeContext'
+import ContactModal from '../components/ContactModal'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -21,6 +23,8 @@ const itemVariants = {
 export default function ProjectDetail() {
   const { id } = useParams()
   const project = projects.find(p => p.id === id)
+  const { isDark, toggle } = useTheme()
+  const [contactOpen, setContactOpen] = useState(false)
 
   if (!project) return (
     <div className="min-h-screen flex items-center justify-center p-6 relative z-10">
@@ -84,69 +88,104 @@ export default function ProjectDetail() {
 
   return (
     <motion.div
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 transition-colors duration-300 relative z-10"
       initial="hidden"
       animate="show"
       variants={containerVariants}
     >
-      {/* Navigation */}
+      {/* Top Floating Glass Navigation */}
       <motion.div
         variants={itemVariants}
-        className="max-w-6xl mx-auto px-6 py-8"
+        className="max-w-6xl mx-auto px-6 py-6"
       >
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors group"
-        >
-          <motion.div
-            whileHover={{ x: -4 }}
-            transition={{ type: 'spring', stiffness: 300 }}
+        <div className="flex items-center justify-between glass px-5 py-3 rounded-2xl border border-white/60 dark:border-slate-800 shadow-sm">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition-colors group"
           >
-            <ArrowLeft size={18} />
-          </motion.div>
-          <span>Back to Portfolio</span>
-        </Link>
+            <motion.div
+              whileHover={{ x: -4 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <ArrowLeft size={18} />
+            </motion.div>
+            <span>Back to Portfolio</span>
+          </Link>
+
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle Button */}
+            <motion.button
+              onClick={toggle}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200/80 dark:border-slate-700"
+              aria-label="Toggle theme"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={isDark ? 'sun' : 'moon'}
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                </motion.span>
+              </AnimatePresence>
+            </motion.button>
+
+            {/* Let's Talk CTA */}
+            <motion.button
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setContactOpen(true)}
+              className="hidden sm:inline-flex items-center text-xs font-semibold px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-white transition-colors"
+            >
+              Let's talk
+            </motion.button>
+          </div>
+        </div>
       </motion.div>
 
       {/* Hero Section — cover photo if available, else gradient */}
       <motion.div
         variants={itemVariants}
-        className="max-w-6xl mx-auto px-6 mb-20"
+        className="max-w-6xl mx-auto px-6 mb-16"
       >
         {coverImage ? (
-          <div className="rounded-2xl overflow-hidden shadow-lg relative">
+          <div className="rounded-3xl overflow-hidden shadow-xl relative border border-slate-200/60 dark:border-slate-800">
             <img
               src={coverImage}
               alt={`${project.title} cover`}
               className="w-full object-cover max-h-[480px]"
             />
             {/* Overlay with title */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-10 sm:p-14">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-8 sm:p-14">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-3 text-white">
+                <h1 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-3 text-white tracking-tight">
                   {project.title}
                 </h1>
-                <p className="text-lg text-white/85 max-w-2xl">
+                <p className="text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed">
                   {project.description}
                 </p>
               </motion.div>
             </div>
           </div>
         ) : (
-          <div className={`rounded-2xl overflow-hidden ${project.coverColor} p-12 sm:p-16 text-white shadow-lg`}>
+          <div className={`rounded-3xl overflow-hidden ${project.coverColor} p-12 sm:p-16 text-white shadow-xl border border-slate-200/40 dark:border-slate-800`}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-4">
+              <h1 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-4 tracking-tight">
                 {project.title}
               </h1>
-              <p className="text-lg opacity-90 max-w-2xl">
+              <p className="text-base sm:text-lg opacity-90 max-w-2xl leading-relaxed">
                 {project.description}
               </p>
             </motion.div>
@@ -159,37 +198,36 @@ export default function ProjectDetail() {
         variants={containerVariants}
         className="max-w-6xl mx-auto px-6 space-y-12 pb-20"
       >
-
         {/* Overview Cards */}
-        <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {/* Role Card */}
           <motion.div
-            whileHover={{ y: -6 }}
+            whileHover={{ y: -4 }}
             transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-            className="bg-slate-50 rounded-xl p-6 border border-slate-200"
+            className="bg-slate-50/90 dark:bg-slate-800/70 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700/80 shadow-sm backdrop-blur-sm"
           >
             <div className="flex items-start gap-3 mb-3">
-              <Users className="text-slate-600 mt-1" size={20} />
-              <h3 className="font-semibold text-slate-900">Role</h3>
+              <Users className="text-indigo-600 dark:text-indigo-400 mt-1" size={20} />
+              <h3 className="font-bold text-slate-900 dark:text-slate-100">Role</h3>
             </div>
-            <p className="text-slate-600 text-sm leading-relaxed">{project.role}</p>
+            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{project.role}</p>
           </motion.div>
 
           {/* Tech Stack Card */}
           <motion.div
-            whileHover={{ y: -6 }}
+            whileHover={{ y: -4 }}
             transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-            className="bg-slate-50 rounded-xl p-6 border border-slate-200"
+            className="bg-slate-50/90 dark:bg-slate-800/70 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700/80 shadow-sm backdrop-blur-sm"
           >
             <div className="flex items-start gap-3 mb-3">
-              <Zap className="text-slate-600 mt-1" size={20} />
-              <h3 className="font-semibold text-slate-900">Tech Stack</h3>
+              <Zap className="text-amber-500 dark:text-amber-400 mt-1" size={20} />
+              <h3 className="font-bold text-slate-900 dark:text-slate-100">Tech Stack</h3>
             </div>
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block bg-white text-slate-700 px-3 py-1 rounded-full text-xs font-medium border border-slate-200"
+                  className="inline-block bg-white dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-600"
                 >
                   {tag}
                 </span>
@@ -199,22 +237,22 @@ export default function ProjectDetail() {
 
           {/* Status Card */}
           <motion.div
-            whileHover={{ y: -6 }}
+            whileHover={{ y: -4 }}
             transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-            className="bg-slate-50 rounded-xl p-6 border border-slate-200"
+            className="bg-slate-50/90 dark:bg-slate-800/70 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700/80 shadow-sm backdrop-blur-sm"
           >
             <div className="flex items-start gap-3 mb-3">
-              <Calendar className="text-slate-600 mt-1" size={20} />
-              <h3 className="font-semibold text-slate-900">Status</h3>
+              <Calendar className="text-emerald-600 dark:text-emerald-400 mt-1" size={20} />
+              <h3 className="font-bold text-slate-900 dark:text-slate-100">Status</h3>
             </div>
-            <p className="text-slate-600 text-sm">
+            <p className="text-slate-600 dark:text-slate-300 text-sm">
               {project.demo?.available ? (
-                <span className="inline-flex items-center gap-1">
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                <span className="inline-flex items-center gap-1.5 font-medium text-emerald-600 dark:text-emerald-400">
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                   Available
                 </span>
               ) : (
-                <span className="text-slate-500">Completed</span>
+                <span className="text-slate-500 dark:text-slate-400">Completed</span>
               )}
             </p>
           </motion.div>
@@ -223,10 +261,11 @@ export default function ProjectDetail() {
         {/* ── Mobile Screenshots Gallery ── */}
         {screenshots.length > 0 && (
           <motion.div variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-slate-900 ">App Screenshots</h2>
+            <h2 className="section-title heading-gradient mb-2">App Screenshots</h2>
+            <div className="fancy-underline mb-6" />
 
             {/* Horizontally scrollable row of phone frames */}
-            <div className="overflow-x-auto pb-4 -mx-6 px-6 pt-10">
+            <div className="overflow-x-auto pb-4 -mx-6 px-6 pt-4">
               <div className="flex gap-5 w-max">
                 {screenshots.map((src, idx) => (
                   <motion.div
@@ -241,10 +280,10 @@ export default function ProjectDetail() {
                     {/* Phone frame */}
                     <div className="relative w-[160px] sm:w-[190px]">
                       {/* Outer shell */}
-                      <div className="rounded-[2.4rem] border-[6px] border-slate-800 bg-slate-800 shadow-2xl overflow-hidden">
+                      <div className="rounded-[2.4rem] border-[6px] border-slate-800 dark:border-slate-700 bg-slate-800 dark:bg-slate-700 shadow-2xl overflow-hidden">
                         {/* Notch */}
-                        <div className="relative bg-slate-800 flex justify-center pt-2 pb-1">
-                          <div className="w-16 h-4 bg-slate-900 rounded-full" />
+                        <div className="relative bg-slate-800 dark:bg-slate-700 flex justify-center pt-2 pb-1">
+                          <div className="w-16 h-4 bg-slate-900 dark:bg-slate-900 rounded-full" />
                         </div>
                         {/* Screen */}
                         <div className="bg-black overflow-hidden" style={{ borderRadius: '0 0 1.6rem 1.6rem' }}>
@@ -257,7 +296,7 @@ export default function ProjectDetail() {
                         </div>
                       </div>
                       {/* Home bar pill */}
-                      <div className="mx-auto mt-2 w-10 h-1 bg-slate-300 rounded-full" />
+                      <div className="mx-auto mt-2 w-10 h-1 bg-slate-300 dark:bg-slate-700 rounded-full" />
                     </div>
                   </motion.div>
                 ))}
@@ -269,7 +308,8 @@ export default function ProjectDetail() {
         {/* Highlights Section */}
         {project.highlights && project.highlights.length > 0 && (
           <motion.div variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Highlights</h2>
+            <h2 className="section-title heading-gradient mb-2">Key Highlights</h2>
+            <div className="fancy-underline mb-6" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.highlights.map((highlight, idx) => (
                 <motion.div
@@ -278,10 +318,10 @@ export default function ProjectDetail() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex gap-3 items-start p-4 bg-slate-50 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors"
+                  className="flex gap-3 items-start p-4 bg-slate-50/90 dark:bg-slate-800/70 rounded-xl border border-slate-200/80 dark:border-slate-700/80 hover:border-slate-300 dark:hover:border-slate-600 transition-colors backdrop-blur-sm"
                 >
-                  <div className="w-2 h-2 bg-slate-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-slate-700">{highlight}</p>
+                  <div className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">{highlight}</p>
                 </motion.div>
               ))}
             </div>
@@ -291,7 +331,8 @@ export default function ProjectDetail() {
         {/* Features Section */}
         {project.features && project.features.length > 0 && (
           <motion.div variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Core Features</h2>
+            <h2 className="section-title heading-gradient mb-2">Core Features</h2>
+            <div className="fancy-underline mb-6" />
             <div className="space-y-3">
               {project.features.map((feature, idx) => (
                 <motion.div
@@ -300,9 +341,9 @@ export default function ProjectDetail() {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="p-4 bg-white border border-slate-200 rounded-lg hover:shadow-md transition-shadow"
+                  className="p-4 bg-white/90 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/80 rounded-xl hover:shadow-md transition-shadow backdrop-blur-sm"
                 >
-                  <p className="text-slate-700">{feature}</p>
+                  <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">{feature}</p>
                 </motion.div>
               ))}
             </div>
@@ -312,7 +353,8 @@ export default function ProjectDetail() {
         {/* Challenges & Solutions */}
         {project.challenges && project.challenges.length > 0 && (
           <motion.div variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Challenges & Solutions</h2>
+            <h2 className="section-title heading-gradient mb-2">Challenges & Solutions</h2>
+            <div className="fancy-underline mb-6" />
             <div className="space-y-4">
               {project.challenges.map((challenge, idx) => (
                 <motion.div
@@ -323,13 +365,13 @@ export default function ProjectDetail() {
                   viewport={{ once: true }}
                   className="grid grid-cols-1 md:grid-cols-2 gap-4"
                 >
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <h4 className="font-semibold text-red-900 mb-2">Challenge</h4>
-                    <p className="text-red-800 text-sm">{challenge.problem}</p>
+                  <div className="p-4 bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-900/40 rounded-xl backdrop-blur-sm">
+                    <h4 className="font-bold text-rose-900 dark:text-rose-300 mb-2">Challenge</h4>
+                    <p className="text-rose-800 dark:text-rose-300/90 text-sm leading-relaxed">{challenge.problem}</p>
                   </div>
-                  <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
-                    <h4 className="font-semibold text-emerald-900 mb-2">Solution</h4>
-                    <p className="text-emerald-800 text-sm">{challenge.solution}</p>
+                  <div className="p-4 bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-900/40 rounded-xl backdrop-blur-sm">
+                    <h4 className="font-bold text-emerald-900 dark:text-emerald-300 mb-2">Solution</h4>
+                    <p className="text-emerald-800 dark:text-emerald-300/90 text-sm leading-relaxed">{challenge.solution}</p>
                   </div>
                 </motion.div>
               ))}
@@ -340,7 +382,8 @@ export default function ProjectDetail() {
         {/* Demo & Links Section */}
         {hasAnyLinks && (
           <motion.div variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Explore Project</h2>
+            <h2 className="section-title heading-gradient mb-2">Explore Project</h2>
+            <div className="fancy-underline mb-6" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {project.demo?.web && (
                 <motion.a
@@ -349,12 +392,12 @@ export default function ProjectDetail() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-3 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
+                  className="flex items-center gap-3 p-4 bg-slate-900 dark:bg-indigo-600 text-white rounded-xl hover:bg-slate-800 dark:hover:bg-indigo-500 transition-colors group shadow-md"
                 >
                   <ExternalLink size={20} />
                   <div>
                     <p className="font-semibold">Live Demo</p>
-                    <p className="text-sm text-slate-400">View the project online</p>
+                    <p className="text-sm text-slate-400 dark:text-indigo-200">View the project online</p>
                   </div>
                 </motion.a>
               )}
@@ -367,9 +410,8 @@ export default function ProjectDetail() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-4 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
+                  className="flex items-center gap-4 p-4 bg-slate-900 dark:bg-slate-800 text-white rounded-xl hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors group border border-transparent dark:border-slate-700 shadow-md"
                 >
-                  {/* Apple icon */}
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 opacity-90">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.18 1.35-2.16 3.99.03 3.16 2.63 4.2 2.66 4.21l-.05.13c-.2.63-.52 1.56-1.2 2.34M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                   </svg>
@@ -388,9 +430,8 @@ export default function ProjectDetail() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-4 p-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors group"
+                  className="flex items-center gap-4 p-4 bg-slate-900 dark:bg-slate-800 text-white rounded-xl hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors group border border-transparent dark:border-slate-700 shadow-md"
                 >
-                  {/* Google Play icon */}
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 opacity-90">
                     <path d="M3.18 23.76c.3.17.63.24.97.2l.1-.04 11.35-6.55-2.47-2.47-9.95 8.86zM.41 1.2C.16 1.57 0 2.08 0 2.73v18.54c0 .65.16 1.16.41 1.53l.08.08 10.39-10.39v-.24L.49 1.12l-.08.08zM20.13 9.53l-2.54-1.46-2.77 2.77 2.77 2.77 2.56-1.48c.73-.42.73-1.19-.02-1.6zM4.15.28l11.35 6.55-2.47 2.47L3.08.44l.1-.04c.34-.04.67.03.97.2v-.32z" />
                   </svg>
@@ -408,16 +449,15 @@ export default function ProjectDetail() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-3 p-4 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors"
+                  className="flex items-center gap-3 p-4 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors border border-slate-300/50 dark:border-slate-700 shadow-sm"
                 >
                   <FiGithub size={20} />
                   <div>
                     <p className="font-semibold">Source Code</p>
-                    <p className="text-sm text-slate-600">View on GitHub</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">View on GitHub</p>
                   </div>
                 </motion.a>
               )}
-
             </div>
           </motion.div>
         )}
@@ -425,16 +465,17 @@ export default function ProjectDetail() {
         {/* Impact Stats */}
         {project.impact && (
           <motion.div variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Impact</h2>
+            <h2 className="section-title heading-gradient mb-2">Impact</h2>
+            <div className="fancy-underline mb-6" />
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {project.impact.map((stat, idx) => (
                 <motion.div
                   key={idx}
                   whileHover={{ y: -4 }}
-                  className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-center"
+                  className="p-4 bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/80 rounded-xl text-center backdrop-blur-sm shadow-sm"
                 >
-                  <p className="text-2xl font-bold text-slate-900 mb-1">{stat.value}</p>
-                  <p className="text-xs text-slate-600">{stat.label}</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-1">{stat.value}</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -444,26 +485,28 @@ export default function ProjectDetail() {
         {/* Related Projects CTA */}
         <motion.div
           variants={itemVariants}
-          className="bg-slate-50 border border-slate-200 rounded-xl p-12 text-center"
+          className="bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-10 sm:p-12 text-center backdrop-blur-sm shadow-sm"
         >
-          <h3 className="text-2xl font-bold text-slate-900 mb-4">Like what you see?</h3>
-          <p className="text-slate-600 mb-8 max-w-lg mx-auto">
+          <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-3 tracking-tight">Like what you see?</h3>
+          <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
             Check out more of my projects or let's collaborate on something amazing.
           </p>
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.96 }}
           >
             <Link
               to="/"
-              className="inline-block px-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors"
+              className="inline-block px-8 py-3.5 bg-slate-900 dark:bg-indigo-600 text-white font-semibold text-sm rounded-xl hover:bg-slate-800 dark:hover:bg-indigo-500 transition-colors shadow-lg shadow-slate-900/10 dark:shadow-indigo-500/25"
             >
               View All Projects
             </Link>
           </motion.div>
         </motion.div>
-
       </motion.div>
+
+      {/* Contact Modal */}
+      <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
     </motion.div>
   )
 }
