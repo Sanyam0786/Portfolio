@@ -25,7 +25,7 @@ const subtitleVariants = {
 export default function Education() {
   return (
     <section className="py-20 bg-slate-50 dark:bg-slate-900" aria-label="education" id="education">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={titleVariants}>
           <h3 className="section-title heading-gradient">Education</h3>
         </motion.div>
@@ -36,10 +36,13 @@ export default function Education() {
           {education.map((ed, idx) => (
             <motion.div key={ed.school} className="timeline-item" variants={item}>
               {/* <div className="timeline-dot" aria-hidden /> */}
-              <motion.div className="timeline-card darkGlass" whileHover={{ scale: 1.02 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }}>
-                <div className="font-semibold text-white">{ed.degree}</div>
-                <div className="text-sm text-slate-200 opacity-90">{ed.school} • {ed.period}</div>
-                <p className="mt-2 text-sm text-slate-200/90">{ed.notes}</p>
+              <motion.div className="timeline-card bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/50" whileHover={{ y: -6, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }}>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                  <div className="font-semibold text-slate-900 dark:text-slate-100">{ed.degree}</div>
+                  <div className="text-sm text-slate-500 dark:text-slate-400">{ed.period}</div>
+                </div>
+                <div className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">{ed.school}</div>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{ed.notes}</p>
               </motion.div>
             </motion.div>
           ))}

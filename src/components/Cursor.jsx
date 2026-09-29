@@ -13,16 +13,26 @@ export default function Cursor() {
 
 		const dot = dotRef.current
 		const ring = ringRef.current
-		let mouseX = 0
-		let mouseY = 0
-		let ringX = 0
-		let ringY = 0
+		let mouseX = -100
+		let mouseY = -100
+		let ringX = -100
+		let ringY = -100
+		let hasMoved = false
 
 		function onMove(e) {
 			const x = e.touches ? e.touches[0].clientX : e.clientX
 			const y = e.touches ? e.touches[0].clientY : e.clientY
 			mouseX = x
 			mouseY = y
+
+			if (!hasMoved) {
+				hasMoved = true
+				ringX = mouseX
+				ringY = mouseY
+				if (dot) dot.style.opacity = '1'
+				if (ring) ring.style.opacity = '1'
+			}
+
 			if (dot) {
 				dot.style.left = `${mouseX}px`
 				dot.style.top = `${mouseY}px`
@@ -30,11 +40,13 @@ export default function Cursor() {
 		}
 
 		function loop() {
-			ringX += (mouseX - ringX) * 0.12
-			ringY += (mouseY - ringY) * 0.12
-			if (ring) {
-				ring.style.left = `${ringX}px`
-				ring.style.top = `${ringY}px`
+			if (hasMoved) {
+				ringX += (mouseX - ringX) * 0.12
+				ringY += (mouseY - ringY) * 0.12
+				if (ring) {
+					ring.style.left = `${ringX}px`
+					ring.style.top = `${ringY}px`
+				}
 			}
 			rafRef.current = requestAnimationFrame(loop)
 		}
@@ -85,8 +97,8 @@ export default function Cursor() {
 
 	return (
 		<>
-			<div ref={ringRef} className="cursor-ring" aria-hidden />
-			<div ref={dotRef} className="cursor-dot" aria-hidden />
+			<div ref={ringRef} className="cursor-ring" style={{ opacity: 0 }} aria-hidden />
+			<div ref={dotRef} className="cursor-dot" style={{ opacity: 0 }} aria-hidden />
 		</>
 	)
 }

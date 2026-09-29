@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import ContactModal from './ContactModal'
 import { useTheme } from '../context/ThemeContext'
+import { useIntro } from '../context/IntroContext'
 import { Sun, Moon } from 'lucide-react'
 import { contact } from '../../data/contact'
 
@@ -19,6 +20,7 @@ export default function Navbar({ onContactOpen }) {
   const [active, setActive] = useState('Home')
   const [scrolled, setScrolled] = useState(false)
   const { isDark, toggle } = useTheme()
+  const { introPhase } = useIntro()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -40,33 +42,65 @@ export default function Navbar({ onContactOpen }) {
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const barVariants = {
-    closed: { rotate: 0, y: 0, opacity: 1 },
-  }
-
   return (
     <nav className="fixed top-6 left-0 right-0 z-40 pointer-events-none">
       <div className="max-w-5xl mx-auto px-6 pointer-events-auto">
-        {/* Main pill */}
+        {/* Main pill stretching from center to grab left/right space */}
         <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, ease: [0.2, 0.9, 0.2, 1] }}
-          className={`flex items-center justify-between glass px-5 py-2.5 rounded-2xl transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'
-            }`}
+          initial={{ scaleX: 0.15, opacity: 0, y: -10 }}
+          animate={{
+            scaleX: introPhase === 'typing' ? 0.15 : 1,
+            opacity: introPhase === 'typing' ? 0 : 1,
+            y: 0,
+          }}
+          transition={{
+            scaleX: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.5, ease: 'easeOut' },
+            y: { duration: 0.6, ease: [0.2, 0.9, 0.2, 1] },
+          }}
+          style={{ transformOrigin: '50% 50%' }}
+          className={`flex items-center justify-between glass px-5 py-2.5 rounded-2xl transition-shadow duration-300 origin-center ${
+            scrolled ? 'shadow-md' : 'shadow-sm'
+          }`}
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3" onClick={() => setActive('Home')}>
+          <Link to="/" id="navbar-brand-logo" className="flex items-center gap-3" onClick={() => setActive('Home')}>
             <motion.span
               className="w-2.5 h-2.5 rounded-full bg-slate-700 dark:bg-slate-300 inline-block"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{
+                scale: introPhase === 'typing' ? 0 : [1, 1.2, 1],
+                opacity: introPhase === 'typing' ? 0 : 1,
+              }}
+              transition={{
+                scale: { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.4 },
+                opacity: { duration: 0.4, delay: 0.4 }
+              }}
             />
-            <span className="text-base font-semibold text-slate-900 dark:text-slate-100 tracking-tight">{contact.name}</span>
+            <motion.span
+              id="navbar-brand-text"
+              initial={{ opacity: 0, x: -15 }}
+              animate={{
+                opacity: introPhase === 'typing' ? 0 : 1,
+                x: introPhase === 'typing' ? -15 : 0,
+              }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="text-base font-semibold text-slate-900 dark:text-slate-100 tracking-tight"
+            >
+              {contact.name}
+            </motion.span>
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden sm:flex items-center gap-1">
+          {/* Desktop links stretching & fading in */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{
+              opacity: introPhase === 'typing' ? 0 : 1,
+              x: introPhase === 'typing' ? 20 : 0,
+            }}
+            transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden sm:flex items-center gap-1"
+          >
             {navLinks.map((link) => (
               <button
                 key={link.label}
@@ -121,30 +155,38 @@ export default function Navbar({ onContactOpen }) {
             >
               Let's talk
             </motion.button>
-          </div>
+          </motion.div>
 
-          {/* Hamburger */}
-          <button
-            className="sm:hidden flex flex-col gap-[5px] p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors"
+          {/* Hamburger Menu Toggle */}
+          <motion.button
+            initial={{ opacity: 0, x: 15 }}
+            animate={{
+              opacity: introPhase === 'typing' ? 0 : 1,
+              x: introPhase === 'typing' ? 15 : 0,
+            }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="sm:hidden relative w-9 h-9 flex items-center justify-center rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
           >
-            <motion.span
-              className="block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 rounded-full origin-center"
-              animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-            <motion.span
-              className="block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 rounded-full"
-              animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.15 }}
-            />
-            <motion.span
-              className="block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 rounded-full origin-center"
-              animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-          </button>
+            <div className="w-5 h-4 relative flex flex-col justify-between items-center">
+              <motion.span
+                className="w-5 h-0.5 bg-slate-700 dark:bg-slate-300 rounded-full origin-center"
+                animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25, ease: [0.2, 0.9, 0.2, 1] }}
+              />
+              <motion.span
+                className="w-5 h-0.5 bg-slate-700 dark:bg-slate-300 rounded-full"
+                animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.15 }}
+              />
+              <motion.span
+                className="w-5 h-0.5 bg-slate-700 dark:bg-slate-300 rounded-full origin-center"
+                animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25, ease: [0.2, 0.9, 0.2, 1] }}
+              />
+            </div>
+          </motion.button>
         </motion.div>
 
         {/* Mobile dropdown */}

@@ -5,14 +5,17 @@ import App from './App'
 import './index.css'
 import Cursor from './components/Cursor'
 import { ThemeProvider } from './context/ThemeContext'
+import { IntroProvider } from './context/IntroContext'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
-        <App />
-        <Cursor />
-      </BrowserRouter>
+      <IntroProvider>
+        <BrowserRouter>
+          <App />
+          <Cursor />
+        </BrowserRouter>
+      </IntroProvider>
     </ThemeProvider>
   </React.StrictMode>
 )

@@ -10,14 +10,14 @@ import ScrollIndicator from '../components/ScrollIndicator'
 import SkillsSection from '../components/SkillSection'
 import ContactModal from '../components/ContactModal'
 
-export default function Home(){
+export default function Home() {
   const [contactOpen, setContactOpen] = useState(false)
   return (
     <div>
       <Navbar onContactOpen={() => setContactOpen(true)} />
       <main className="pt-24">
         <Hero onContactOpen={() => setContactOpen(true)} />
-        <SkillsSection/>
+        <SkillsSection />
         <ProjectsSection />
         <Experience />
         <FreelanceBanner />

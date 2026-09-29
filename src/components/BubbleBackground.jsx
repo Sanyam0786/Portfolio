@@ -252,16 +252,6 @@ export default function BubbleBackground({ maxBubbles = 28, isDark = false }) {
     window.addEventListener('touchmove', onPointerMove, { passive: true })
     document.addEventListener('visibilitychange', onVisibilityChange)
 
-    // device orientation gentle parallax (optional, low amplitude)
-    function onDeviceOrientation(ev) {
-      if (!ev || typeof ev.gamma === 'undefined') return
-      const p = stateRef.current.pointer
-      // small offset based on tilt
-      p.x = width / 2 + (ev.gamma || 0) * 3
-      p.y = height / 2 + (ev.beta || 0) * 2
-    }
-    window.addEventListener('deviceorientation', onDeviceOrientation, true)
-
     rafRef.current = requestAnimationFrame(step)
 
     // small interval to check for shockwaves
@@ -273,7 +263,6 @@ export default function BubbleBackground({ maxBubbles = 28, isDark = false }) {
       window.removeEventListener('pointerleave', onPointerLeave)
       window.removeEventListener('touchmove', onPointerMove)
       document.removeEventListener('visibilitychange', onVisibilityChange)
-      window.removeEventListener('deviceorientation', onDeviceOrientation)
       cancelAnimationFrame(rafRef.current)
       clearInterval(shockInterval)
     }

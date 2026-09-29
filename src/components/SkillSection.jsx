@@ -62,7 +62,7 @@ const SkillsSection = () => {
           {/* Section Title */}
           <motion.div variants={itemVariants}>
             <h2 className="section-title heading-gradient mb-3">Technical Skills</h2>
-            <div className="fancy-underline mb-4" />
+            <motion.div className="fancy-underline mt-3" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} style={{ transformOrigin: 'left' }} />
             <p className="section-subtitle">Technologies and tools I work with</p>
           </motion.div>
 
@@ -109,8 +109,8 @@ const SkillsSection = () => {
 
                     {/* Level Badge */}
                     <span className={`text-xs font-medium px-3 py-1 rounded-full ${skill.level === 'Expert'
-                        ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900'
-                        : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                      ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900'
+                      : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
                       }`}>
                       {skill.level}
                     </span>

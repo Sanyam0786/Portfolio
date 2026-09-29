@@ -1,6 +1,6 @@
 export const contact = {
   name: "Sanyam Mujavadia",
-  role: "React Native Specialist",
+  role: "React & React Native Developer",
   email: "sanyammj786@gmail.com",
   linkedin: "https://www.linkedin.com/in/sanyam-mujavadia-88819328a/",
   whatsapp: "https://wa.me/917861961399",
