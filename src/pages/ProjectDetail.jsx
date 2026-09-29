@@ -147,48 +147,51 @@ export default function ProjectDetail() {
         </div>
       </motion.div>
 
-      {/* Hero Section — cover photo if available, else gradient */}
+      {/* Project Hero Header & Cover Showcase */}
       <motion.div
         variants={itemVariants}
-        className="max-w-6xl mx-auto px-6 mb-16"
+        className="max-w-6xl mx-auto px-6 mb-12 sm:mb-16"
       >
+        {/* Title & Description Header */}
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-200/60 dark:border-indigo-800/60">
+              {project.role}
+            </span>
+            {project.demo?.available && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/60">
+                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                Live
+              </span>
+            )}
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
+            {project.title}
+          </h1>
+          <p className="mt-3 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Cover Showcase Image */}
         {coverImage ? (
-          <div className="rounded-3xl overflow-hidden shadow-xl relative border border-slate-200/60 dark:border-slate-800">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 dark:border-slate-800 bg-slate-100 dark:bg-slate-900"
+          >
             <img
               src={coverImage}
-              alt={`${project.title} cover`}
-              className="w-full object-cover max-h-[480px]"
+              alt={`${project.title} cover preview`}
+              className="w-full object-cover max-h-[500px] hover:scale-[1.01] transition-transform duration-500"
             />
-            {/* Overlay with title */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-8 sm:p-14">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                <h1 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-3 text-white tracking-tight">
-                  {project.title}
-                </h1>
-                <p className="text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed">
-                  {project.description}
-                </p>
-              </motion.div>
-            </div>
-          </div>
+          </motion.div>
         ) : (
-          <div className={`rounded-3xl overflow-hidden ${project.coverColor} p-12 sm:p-16 text-white shadow-xl border border-slate-200/40 dark:border-slate-800`}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <h1 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-4 tracking-tight">
-                {project.title}
-              </h1>
-              <p className="text-base sm:text-lg opacity-90 max-w-2xl leading-relaxed">
-                {project.description}
-              </p>
-            </motion.div>
+          <div className={`rounded-2xl sm:rounded-3xl overflow-hidden ${project.coverColor || 'bg-gradient-to-br from-indigo-500 to-blue-600'} p-8 sm:p-14 text-white shadow-xl border border-slate-200/40 dark:border-slate-800`}>
+            <p className="text-sm font-medium tracking-widest uppercase opacity-80 mb-2">Project Preview</p>
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">{project.title}</h2>
           </div>
         )}
       </motion.div>

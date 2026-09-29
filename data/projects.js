@@ -284,7 +284,7 @@ export const projects = [
 
   {
     id: "kyora-iq",
-    title: "Kyora IQ (React Native)",
+    title: "Kyora IQ",
     role: "React Native Developer",
     description:
       "A service marketplace app connecting users with cybersecurity and cloud experts, featuring real-time chat, booking workflows, and role-based experiences.",
