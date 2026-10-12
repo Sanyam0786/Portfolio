@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { featuresSentences } from '../../data/home'
 
-export default function Hero({ onContactOpen }){
-  
-
+export default function Hero({ onContactOpen }) {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
@@ -97,7 +95,7 @@ export default function Hero({ onContactOpen }){
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-semibold rounded-lg transition-all duration-300 hover:bg-slate-800 dark:hover:bg-white hover:shadow-lg"
-              onClick={onContactOpen} 
+              onClick={onContactOpen}
             >
               Let's Work Together
             </motion.button>

@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import ProjectsSection from '../components/ProjectsSection'
 import Experience from '../components/Experience'
 import Education from '../components/Education'
+import ResumeSection from '../components/ResumeSection'
 import FreelanceBanner from '../components/FreelanceBanner'
 import Footer from '../components/Footer'
 import ScrollIndicator from '../components/ScrollIndicator'
@@ -22,6 +23,7 @@ export default function Home() {
         <Experience />
         <FreelanceBanner />
         <Education />
+        <ResumeSection />
         <Footer />
       </main>
       <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />

@@ -13,6 +13,7 @@ const navLinks = [
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
+  { label: 'Resume', href: '#resume' },
 ]
 
 export default function Navbar({ onContactOpen }) {
