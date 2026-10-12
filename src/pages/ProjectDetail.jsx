@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { projects } from '../../data/projects'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -25,6 +25,24 @@ export default function ProjectDetail() {
   const project = projects.find(p => p.id === id)
   const { isDark, toggle } = useTheme()
   const [contactOpen, setContactOpen] = useState(false)
+
+  // Dynamically update document title and description for SEO
+  useEffect(() => {
+    if (project) {
+      document.title = `${project.title} — Sanyam Mujavadia`
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) {
+        metaDesc.setAttribute('content', project.description || `${project.title} — developed by Sanyam Mujavadia.`)
+      }
+    }
+    return () => {
+      document.title = 'Sanyam Mujavadia — React Native & Web Developer Portfolio'
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'React Native & Frontend Developer specializing in high-performance iOS, Android, and web applications.')
+      }
+    }
+  }, [project])
 
   if (!project) return (
     <div className="min-h-screen flex items-center justify-center p-6 relative z-10">
@@ -292,7 +310,7 @@ export default function ProjectDetail() {
                         <div className="bg-black overflow-hidden" style={{ borderRadius: '0 0 1.6rem 1.6rem' }}>
                           <img
                             src={src}
-                            alt={`Screenshot ${idx + 1}`}
+                            alt={`${project.title} app screenshot ${idx + 1}`}
                             className="w-full object-cover"
                             style={{ aspectRatio: '9/19.5' }}
                           />

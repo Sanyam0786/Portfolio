@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sanyammujavadia.netlify.app/sitemap.xml
