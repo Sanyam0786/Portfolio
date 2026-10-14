@@ -1,13 +1,19 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { skills } from '../../data/skills'
+import { skills as fallbackSkills } from '../../data/skills'
+import { SkillItem } from '../types'
 
-const SkillsSection = (): React.JSX.Element => {
+interface SkillsSectionProps {
+  items?: SkillItem[]
+}
+
+const SkillsSection = ({ items }: SkillsSectionProps): React.JSX.Element => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const trackRef = useRef<HTMLDivElement | null>(null)
 
+  const activeSkills = items && items.length > 0 ? items : fallbackSkills
   // Duplicate skills 3 times for a seamless infinite wrap-around
-  const displaySkills = [...skills, ...skills, ...skills]
+  const displaySkills = [...activeSkills, ...activeSkills, ...activeSkills]
 
   const isHoveredRef = useRef<boolean>(false)
   const isDraggingRef = useRef<boolean>(false)

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { projects } from '../../data/projects'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, Users, Zap, Calendar, ExternalLink, FolderX, Sun, Moon } from 'lucide-react'
+import { ArrowLeft, Users, Zap, Calendar, ExternalLink, FolderX, Sun, Moon, Loader2 } from 'lucide-react'
 import { FiGithub } from 'react-icons/fi'
 import { useTheme } from '../context/ThemeContext'
 import ContactModal from '../components/ContactModal'
+import { usePortfolioData } from '../hooks/usePortfolioData'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -22,7 +22,8 @@ const itemVariants = {
 
 export default function ProjectDetail() {
   const { id } = useParams()
-  const project = projects.find(p => p.id === id)
+  const { projects: allProjects, isLoading } = usePortfolioData()
+  const project = allProjects.find(p => p.id === id)
   const { isDark, toggle } = useTheme()
   const [contactOpen, setContactOpen] = useState(false)
 
@@ -43,6 +44,14 @@ export default function ProjectDetail() {
       }
     }
   }, [project])
+
+  if (isLoading && !project) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6 relative z-10">
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-500" />
+      </div>
+    )
+  }
 
   if (!project) return (
     <div className="min-h-screen flex items-center justify-center p-6 relative z-10">
@@ -179,12 +188,6 @@ export default function ProjectDetail() {
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-200/60 dark:border-indigo-800/60">
               {project.role}
             </span>
-            {project.demo?.available && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/60">
-                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-                Live
-              </span>
-            )}
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
@@ -201,18 +204,18 @@ export default function ProjectDetail() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 dark:border-slate-800 bg-slate-100 dark:bg-slate-900"
+            className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 aspect-[16/9] max-h-[540px] w-full"
           >
             <img
               src={coverImage}
               alt={`${project.title} cover preview`}
-              className="w-full object-cover max-h-[500px] hover:scale-[1.01] transition-transform duration-500"
+              className="w-full h-full object-cover hover:scale-[1.01] transition-transform duration-500"
             />
           </motion.div>
         ) : (
-          <div className={`rounded-2xl sm:rounded-3xl overflow-hidden ${project.coverColor || 'bg-gradient-to-br from-indigo-500 to-blue-600'} p-8 sm:p-14 text-white shadow-xl border border-slate-200/40 dark:border-slate-800`}>
-            <p className="text-sm font-medium tracking-widest uppercase opacity-80 mb-2">Project Preview</p>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">{project.title}</h2>
+          <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 p-8 sm:p-14 text-white shadow-xl border border-slate-800">
+            <p className="text-sm font-medium tracking-widest uppercase text-slate-400 mb-2">Project Preview</p>
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">{project.title}</h2>
           </div>
         )}
       </motion.div>

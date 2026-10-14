@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { featuresSentences } from '../../data/home'
+import { featuresSentences as fallbackSentences } from '../../data/home'
 
 export interface HeroProps {
   onContactOpen?: () => void
+  sentences?: string[]
 }
 
-export default function Hero({ onContactOpen }: HeroProps): React.JSX.Element {
+export default function Hero({ onContactOpen, sentences }: HeroProps): React.JSX.Element {
+  const activeSentences = sentences && sentences.length > 0 ? sentences : fallbackSentences
   const [current, setCurrent] = useState<number>(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % featuresSentences.length)
+      setCurrent((prev) => (prev + 1) % activeSentences.length)
     }, 5000) // Change every 5 seconds
     return () => clearInterval(interval)
-  }, [])
+  }, [activeSentences.length])
 
   const textVariants = {
     enter: (direction: number) => ({
@@ -57,14 +59,14 @@ export default function Hero({ onContactOpen }: HeroProps): React.JSX.Element {
                 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight absolute w-full"
               >
-                <span className="gradient-text block">{featuresSentences[current]}</span>
+                <span className="gradient-text block">{activeSentences[current]}</span>
               </motion.h1>
             </AnimatePresence>
           </div>
 
           {/* Cycle indicators */}
           <div className="flex gap-2 mt-8 mb-6 ">
-            {featuresSentences.map((_, idx) => (
+            {activeSentences.map((_, idx) => (
               <motion.button
                 key={idx}
                 onClick={() => setCurrent(idx)}

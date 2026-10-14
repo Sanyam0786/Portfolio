@@ -239,6 +239,18 @@ body::-webkit-scrollbar {
   background: #64748b;
 }
 
+/* Dark Mode Scrollbar */
+.dark .scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
 /* Heading gradient — lighter in dark */
 .dark .heading-gradient {
   background: linear-gradient(90deg, #94a3b8, #cbd5e1);

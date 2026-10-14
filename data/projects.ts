@@ -290,7 +290,6 @@ export const projects: ProjectItem[] = [
     description:
       "A service marketplace app connecting users with cybersecurity and cloud experts, featuring real-time chat, booking workflows, and role-based experiences.",
     tags: ["React Native", "TypeScript", "Firebase", "Realtime", "Dark Mode"],
-    coverColor: "bg-gradient-to-br from-purple-500 to-indigo-600",
 
     coverImage: images.img_cyberboss,
     screenshots: [

@@ -78,7 +78,7 @@ export default function ProjectCard({ project }: ProjectCardProps): React.JSX.El
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-t-2xl" />
               </>
             ) : (
-              <div className={`absolute inset-0 ${project.coverColor} rounded-t-2xl`} />
+              <div className="absolute inset-0 bg-slate-800 rounded-t-2xl border-b border-slate-700/40" />
             )}
 
             {/* Title — sits on top of both image and gradient */}

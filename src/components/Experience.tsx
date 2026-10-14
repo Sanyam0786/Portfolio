@@ -1,13 +1,20 @@
 import React from 'react'
-import { experience } from '../../data/experience'
+import { experience as fallbackExperience } from '../../data/experience'
 import { motion } from 'framer-motion'
+import { ExperienceItem } from '../types'
+
+interface ExperienceProps {
+  items?: ExperienceItem[]
+}
 
 const container = { show: { transition: { staggerChildren: 0.12 } } }
 const item = (dir = 'left') => ({ hidden: { x: dir === 'left' ? -48 : 48, opacity: 0 }, show: { x: 0, opacity: 1, transition: { duration: 0.6, ease: [0.2,0.9,0.2,1] } } })
 const titleVariants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.2,0.9,0.2,1] } } }
 const subtitleVariants = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.8, delay: 0.2 } } }
 
-export default function Experience(){
+export default function Experience({ items }: ExperienceProps = {}){
+  const displayExperience = items && items.length > 0 ? items : fallbackExperience
+
   return (
     <section className="py-20" aria-label="experience" id="experience">
       <div className="max-w-6xl mx-auto px-6">
@@ -18,7 +25,7 @@ export default function Experience(){
         <motion.p className="section-subtitle" variants={subtitleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Professional timeline — role, impact, and highlights.</motion.p>
 
         <motion.div className="timeline" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.12 }} variants={container}>
-          {experience.map((e, i) => {
+          {displayExperience.map((e, i) => {
             const dir = i % 2 === 0 ? 'left' : 'right'
             return (
               <motion.div key={e.company} className="timeline-item" variants={item(dir)}>

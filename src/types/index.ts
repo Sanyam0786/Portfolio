@@ -56,7 +56,7 @@ export interface ProjectItem {
   description: string;
   tags: string[];
   demo?: ProjectDemo;
-  coverColor: string;
+  coverColor?: string;
   highlights: string[];
   features: string[];
   challenges: ProjectChallenge[];

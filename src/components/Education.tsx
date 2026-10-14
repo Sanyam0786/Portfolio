@@ -1,6 +1,11 @@
 import React from 'react'
-import { education } from '../../data/education'
+import { education as fallbackEducation } from '../../data/education'
 import { motion } from 'framer-motion'
+import { EducationItem } from '../types'
+
+interface EducationProps {
+  items?: EducationItem[]
+}
 
 const container = {
   hidden: {},
@@ -22,7 +27,9 @@ const subtitleVariants = {
   show: { opacity: 1, transition: { duration: 0.8, delay: 0.2 } }
 }
 
-export default function Education() {
+export default function Education({ items }: EducationProps = {}) {
+  const displayEducation = items && items.length > 0 ? items : fallbackEducation
+
   return (
     <section className="py-20 bg-slate-50 dark:bg-slate-900" aria-label="education" id="education">
       <div className="max-w-6xl mx-auto px-6">
@@ -33,7 +40,7 @@ export default function Education() {
         <motion.p className="section-subtitle" variants={subtitleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Academic background and focused coursework.</motion.p>
 
         <motion.div className="timeline" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} variants={container}>
-          {education.map((ed, idx) => (
+          {displayEducation.map((ed, idx) => (
             <motion.div key={ed.school} className="timeline-item" variants={item}>
               {/* <div className="timeline-dot" aria-hidden /> */}
               <motion.div className="timeline-card bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/50" whileHover={{ y: -6, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }}>
