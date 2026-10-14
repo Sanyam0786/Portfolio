@@ -16,10 +16,14 @@ const navLinks = [
   { label: 'Resume', href: '#resume' },
 ]
 
-export default function Navbar({ onContactOpen }) {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [active, setActive] = useState('Home')
-  const [scrolled, setScrolled] = useState(false)
+export interface NavbarProps {
+  onContactOpen?: () => void
+}
+
+export default function Navbar({ onContactOpen }: NavbarProps): React.JSX.Element {
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
+  const [active, setActive] = useState<string>('Home')
+  const [scrolled, setScrolled] = useState<boolean>(false)
   const { isDark, toggle } = useTheme()
   const { introPhase } = useIntro()
 
@@ -36,7 +40,7 @@ export default function Navbar({ onContactOpen }) {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  const handleNavClick = (label, href) => {
+  const handleNavClick = (label: string, href: string) => {
     setActive(label)
     setMenuOpen(false)
     const el = document.querySelector(href)
@@ -60,9 +64,8 @@ export default function Navbar({ onContactOpen }) {
             y: { duration: 0.6, ease: [0.2, 0.9, 0.2, 1] },
           }}
           style={{ transformOrigin: '50% 50%' }}
-          className={`flex items-center justify-between glass px-5 py-2.5 rounded-2xl transition-shadow duration-300 origin-center ${
-            scrolled ? 'shadow-md' : 'shadow-sm'
-          }`}
+          className={`flex items-center justify-between glass px-5 py-2.5 rounded-2xl transition-shadow duration-300 origin-center ${scrolled ? 'shadow-md' : 'shadow-sm'
+            }`}
         >
           {/* Logo */}
           <Link to="/" id="navbar-brand-logo" className="flex items-center gap-3" onClick={() => setActive('Home')}>
@@ -152,7 +155,7 @@ export default function Navbar({ onContactOpen }) {
               whileHover={{ scale: 1.04, y: -1 }}
               whileTap={{ scale: 0.96 }}
               className="ml-2 text-sm font-semibold text-white bg-slate-900 dark:bg-slate-100 dark:text-slate-900 px-4 py-1.5 rounded-xl hover:bg-slate-800 dark:hover:bg-white transition-colors duration-200"
-              onClick={() => { setMenuOpen(false); onContactOpen() }}
+              onClick={() => { setMenuOpen(false); onContactOpen?.() }}
             >
               Let's talk
             </motion.button>
@@ -233,7 +236,7 @@ export default function Navbar({ onContactOpen }) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.25 }}
                 className="w-full text-sm font-semibold text-white bg-slate-900 dark:bg-slate-100 dark:text-slate-900 px-4 py-2.5 rounded-xl hover:bg-slate-800 dark:hover:bg-white transition-colors"
-                onClick={() => { setMenuOpen(false); onContactOpen() }}
+                onClick={() => { setMenuOpen(false); onContactOpen?.() }}
               >
                 Let's talk
               </motion.button>

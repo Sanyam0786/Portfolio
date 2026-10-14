@@ -1,4 +1,6 @@
-export const contact = {
+import { ContactInfo } from "../src/types";
+
+export const contact: ContactInfo = {
   name: "Sanyam Mujavadia",
   role: "React & React Native Developer",
   email: "sanyammj786@gmail.com",

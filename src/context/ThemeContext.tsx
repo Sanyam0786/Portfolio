@@ -1,9 +1,14 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 
-const ThemeContext = createContext({ isDark: false, toggle: () => {} })
+export interface ThemeContextType {
+  isDark: boolean
+  toggle: () => void
+}
 
-export function ThemeProvider({ children }) {
-  const [isDark, setIsDark] = useState(() => {
+const ThemeContext = createContext<ThemeContextType>({ isDark: false, toggle: () => {} })
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [isDark, setIsDark] = useState<boolean>(() => {
     // 1. Check localStorage first
     const stored = localStorage.getItem('theme')
     if (stored === 'dark') return true
@@ -31,6 +36,6 @@ export function ThemeProvider({ children }) {
   )
 }
 
-export function useTheme() {
+export function useTheme(): ThemeContextType {
   return useContext(ThemeContext)
 }

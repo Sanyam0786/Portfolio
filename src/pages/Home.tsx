@@ -7,12 +7,11 @@ import Education from '../components/Education'
 import ResumeSection from '../components/ResumeSection'
 import FreelanceBanner from '../components/FreelanceBanner'
 import Footer from '../components/Footer'
-import ScrollIndicator from '../components/ScrollIndicator'
 import SkillsSection from '../components/SkillSection'
 import ContactModal from '../components/ContactModal'
 
-export default function Home() {
-  const [contactOpen, setContactOpen] = useState(false)
+export default function Home(): React.JSX.Element {
+  const [contactOpen, setContactOpen] = useState<boolean>(false)
   return (
     <div>
       <Navbar onContactOpen={() => setContactOpen(true)} />

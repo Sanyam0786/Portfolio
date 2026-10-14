@@ -4,14 +4,28 @@ import { Mail } from 'lucide-react'
 import { FaWhatsapp, FaLinkedinIn, FaGithub } from 'react-icons/fa'
 import { contact } from '../../data/contact'
 
-export default function Footer() {
-  const [state, setState] = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState('idle') // idle, sending, success
-  const [errors, setErrors] = useState({})
-  const formRef = useRef(null)
+interface FormState {
+  name: string
+  email: string
+  message: string
+}
 
-  function validate() {
-    const errs = {}
+interface FormErrors {
+  name?: string
+  email?: string
+  message?: string
+}
+
+type FormStatus = 'idle' | 'sending' | 'success'
+
+export default function Footer(): React.JSX.Element {
+  const [state, setState] = useState<FormState>({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState<FormStatus>('idle') // idle, sending, success
+  const [errors, setErrors] = useState<FormErrors>({})
+  const formRef = useRef<HTMLFormElement | null>(null)
+
+  function validate(): boolean {
+    const errs: FormErrors = {}
     if (!state.name.trim()) errs.name = 'Name required'
     if (!state.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) errs.email = 'Valid email required'
     if (!state.message.trim()) errs.message = 'Message required'
@@ -19,14 +33,18 @@ export default function Footer() {
     return Object.keys(errs).length === 0
   }
 
-  function handleChange(e) {
-    setState({ ...state, [e.target.name]: e.target.value })
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target
+    setState((prev) => ({ ...prev, [name]: value }))
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }))
+    }
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
-    if (!validate()) return
+    if (!validate() || !formRef.current) return
 
     setStatus('sending')
 

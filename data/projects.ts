@@ -1,6 +1,7 @@
 import { images } from "../src/assets";
+import { ProjectItem } from "../src/types";
 
-export const projects = [
+export const projects: ProjectItem[] = [
   // {
   //   id: "veliyx",
   //   title: "Veliyx & Veliyx Driver",
@@ -289,7 +290,6 @@ export const projects = [
     description:
       "A service marketplace app connecting users with cybersecurity and cloud experts, featuring real-time chat, booking workflows, and role-based experiences.",
     tags: ["React Native", "TypeScript", "Firebase", "Realtime", "Dark Mode"],
-    demo: { store: "", web: "", available: true },
     coverColor: "bg-gradient-to-br from-purple-500 to-indigo-600",
 
     coverImage: images.img_cyberboss,

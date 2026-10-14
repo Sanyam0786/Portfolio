@@ -1,4 +1,6 @@
-export const experience = [
+import { ExperienceItem } from "../src/types";
+
+export const experience: ExperienceItem[] = [
   {
     company: "Silversky Technology",
     role: "React Native Developer",

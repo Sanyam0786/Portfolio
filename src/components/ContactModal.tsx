@@ -4,16 +4,36 @@ import { Mail } from 'lucide-react'
 import { FaWhatsapp, FaLinkedinIn, FaGithub } from 'react-icons/fa'
 import { contact } from '../../data/contact'
 
-export default function ContactModal({ isOpen, onClose }) {
-  const [state, setState] = useState({ name: '', email: '', message: '' })
-  const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState('idle') // idle | sending | success
-  const formRef = useRef(null)
-  const firstInputRef = useRef(null)
+export interface ContactModalProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+interface FormState {
+  name: string
+  email: string
+  message: string
+}
+
+interface FormErrors {
+  name?: string
+  email?: string
+  message?: string
+  form?: string
+}
+
+type FormStatus = 'idle' | 'sending' | 'success'
+
+export default function ContactModal({ isOpen, onClose }: ContactModalProps): React.JSX.Element {
+  const [state, setState] = useState<FormState>({ name: '', email: '', message: '' })
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [status, setStatus] = useState<FormStatus>('idle') // idle | sending | success
+  const formRef = useRef<HTMLFormElement | null>(null)
+  const firstInputRef = useRef<HTMLInputElement | null>(null)
 
   // Close on Escape key
   useEffect(() => {
-    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
@@ -29,8 +49,8 @@ export default function ContactModal({ isOpen, onClose }) {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
-  function validate() {
-    const errs = {}
+  function validate(): boolean {
+    const errs: FormErrors = {}
     if (!state.name.trim()) errs.name = 'Name required'
     if (!state.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) errs.email = 'Valid email required'
     if (!state.message.trim()) errs.message = 'Message required'
@@ -38,14 +58,17 @@ export default function ContactModal({ isOpen, onClose }) {
     return Object.keys(errs).length === 0
   }
 
-  function handleChange(e) {
-    setState((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-    if (errors[e.target.name]) setErrors((prev) => ({ ...prev, [e.target.name]: '' }))
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target
+    setState((prev) => ({ ...prev, [name]: value }))
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }))
+    }
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!validate()) return
+    if (!validate() || !formRef.current) return
     setStatus('sending')
     try {
       const res = await fetch(contact.formspree, {
@@ -65,7 +88,7 @@ export default function ContactModal({ isOpen, onClose }) {
     }
   }
 
-  const inputClass = (field) =>
+  const inputClass = (field: keyof FormErrors) =>
     `w-full bg-white/60 dark:bg-slate-700/50 border rounded-xl px-3 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500
      focus:outline-none focus:ring-2 transition-all duration-200 ${errors[field]
       ? 'border-rose-300 focus:ring-rose-200'

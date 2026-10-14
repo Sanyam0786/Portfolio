@@ -1,6 +1,7 @@
 import { icons } from "../src/assets";
+import { SkillItem } from "../src/types";
 
-export const skills = [
+export const skills: SkillItem[] = [
   { name: "React Native", icon: icons.ic_react, level: "Expert" },
   { name: "TypeScript", icon: icons.ic_ts, level: "Expert" },
   { name: "JavaScript", icon: icons.ic_js, level: "Expert", },

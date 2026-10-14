@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 
-export default function Cursor() {
-	const dotRef = useRef(null)
-	const ringRef = useRef(null)
-	const rafRef = useRef(null)
+export default function Cursor(): React.JSX.Element {
+	const dotRef = useRef<HTMLDivElement | null>(null)
+	const ringRef = useRef<HTMLDivElement | null>(null)
+	const rafRef = useRef<number | null>(null)
 
 	useEffect(() => {
 		if (typeof window === 'undefined') return
@@ -19,9 +19,10 @@ export default function Cursor() {
 		let ringY = -100
 		let hasMoved = false
 
-		function onMove(e) {
-			const x = e.touches ? e.touches[0].clientX : e.clientX
-			const y = e.touches ? e.touches[0].clientY : e.clientY
+		function onMove(e: MouseEvent | TouchEvent) {
+			const touch = 'touches' in e && e.touches.length > 0 ? e.touches[0] : null
+			const x = touch ? touch.clientX : (e as MouseEvent).clientX
+			const y = touch ? touch.clientY : (e as MouseEvent).clientY
 			mouseX = x
 			mouseY = y
 
@@ -74,11 +75,13 @@ export default function Cursor() {
 		document.addEventListener('mouseup', onUp)
 
 		const interactiveSelector = 'a,button,[data-cursor],.project-card'
-		function handleOver(e) {
-			if (e.target && e.target.closest && e.target.closest(interactiveSelector)) onEnterInteractive()
+		function handleOver(e: MouseEvent) {
+			const target = e.target as HTMLElement | null
+			if (target && target.closest && target.closest(interactiveSelector)) onEnterInteractive()
 		}
-		function handleOut(e) {
-			if (e.target && e.target.closest && e.target.closest(interactiveSelector)) onLeaveInteractive()
+		function handleOut(e: MouseEvent) {
+			const target = e.target as HTMLElement | null
+			if (target && target.closest && target.closest(interactiveSelector)) onLeaveInteractive()
 		}
 		document.addEventListener('mouseover', handleOver)
 		document.addEventListener('mouseout', handleOut)
@@ -91,7 +94,7 @@ export default function Cursor() {
 			document.removeEventListener('mouseup', onUp)
 			document.removeEventListener('mouseover', handleOver)
 			document.removeEventListener('mouseout', handleOut)
-			cancelAnimationFrame(rafRef.current)
+			if (rafRef.current) cancelAnimationFrame(rafRef.current)
 		}
 	}, [])
 

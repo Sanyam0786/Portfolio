@@ -9,10 +9,10 @@ import ScrollIndicator from './components/ScrollIndicator'
 import { useTheme } from './context/ThemeContext'
 import IntroAnimation from './components/IntroAnimation'
 
-export default function App() {
+export default function App(): React.JSX.Element {
   const location = useLocation()
   const { isDark } = useTheme()
-  const [hasShownIntro, setHasShownIntro] = useState(false)
+  const [hasShownIntro, setHasShownIntro] = useState<boolean>(false)
 
   // Scroll to top whenever route changes
   useEffect(() => {

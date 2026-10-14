@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { featuresSentences } from '../../data/home'
 
-export default function Hero({ onContactOpen }) {
-  const [current, setCurrent] = useState(0)
+export interface HeroProps {
+  onContactOpen?: () => void
+}
+
+export default function Hero({ onContactOpen }: HeroProps): React.JSX.Element {
+  const [current, setCurrent] = useState<number>(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,7 +17,7 @@ export default function Hero({ onContactOpen }) {
   }, [])
 
   const textVariants = {
-    enter: (direction) => ({
+    enter: (direction: number) => ({
       y: direction > 0 ? 40 : -40,
       opacity: 0
     }),
@@ -22,7 +26,7 @@ export default function Hero({ onContactOpen }) {
       y: 0,
       opacity: 1
     },
-    exit: (direction) => ({
+    exit: (direction: number) => ({
       zIndex: 0,
       y: direction < 0 ? 40 : -40,
       opacity: 0

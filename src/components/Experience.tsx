@@ -24,14 +24,12 @@ export default function Experience(){
               <motion.div key={e.company} className="timeline-item" variants={item(dir)}>
                 {/* <div className="timeline-dot" aria-hidden /> */}
                 <motion.div className="timeline-card bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/50" whileHover={{ y: -6, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }}>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="font-semibold">{e.role}</div>
-                      <div className="text-sm opacity-80 dark:text-slate-400">{e.company}</div>
-                    </div>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <div className="font-semibold text-slate-900 dark:text-slate-100">{e.role}</div>
                     <div className="text-sm text-slate-500 dark:text-slate-400">{e.period}</div>
                   </div>
-                  <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">{e.impact}</p>
+                  <div className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">{e.company}</div>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{e.impact}</p>
                 </motion.div>
               </motion.div>
             )

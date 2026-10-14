@@ -1,4 +1,6 @@
-export const education = [
+import { EducationItem } from "../src/types";
+
+export const education: EducationItem[] = [
   {
     school: "Silver Oak University",
     degree: "B.Tech Computer Science Engineering",

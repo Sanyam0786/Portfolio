@@ -2,26 +2,26 @@ import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { skills } from '../../data/skills'
 
-const SkillsSection = () => {
-  const containerRef = useRef(null)
-  const trackRef = useRef(null)
+const SkillsSection = (): React.JSX.Element => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const trackRef = useRef<HTMLDivElement | null>(null)
 
   // Duplicate skills 3 times for a seamless infinite wrap-around
   const displaySkills = [...skills, ...skills, ...skills]
 
-  const isHoveredRef = useRef(false)
-  const isDraggingRef = useRef(false)
-  const startXRef = useRef(0)
-  const lastXRef = useRef(0)
-  const lastTimeRef = useRef(0)
-  const velocityRef = useRef(0)
-  const posRef = useRef(0)
-  const rafRef = useRef(null)
+  const isHoveredRef = useRef<boolean>(false)
+  const isDraggingRef = useRef<boolean>(false)
+  const startXRef = useRef<number>(0)
+  const lastXRef = useRef<number>(0)
+  const lastTimeRef = useRef<number>(0)
+  const velocityRef = useRef<number>(0)
+  const posRef = useRef<number>(0)
+  const rafRef = useRef<number | null>(null)
 
-  const [isCursorGrabbing, setIsCursorGrabbing] = useState(false)
+  const [isCursorGrabbing, setIsCursorGrabbing] = useState<boolean>(false)
 
   // Measure one full loop width (1/3 of total scrollWidth)
-  const getLoopWidth = useCallback(() => {
+  const getLoopWidth = useCallback((): number => {
     if (!trackRef.current) return 0
     return trackRef.current.scrollWidth / 3
   }, [])
@@ -31,7 +31,7 @@ const SkillsSection = () => {
     let lastFrameTime = performance.now()
     const autoSpeed = 1 // px per frame at 60fps
 
-    const animate = (currentTime) => {
+    const animate = (currentTime: number) => {
       const dt = Math.min((currentTime - lastFrameTime) / 16.667, 2.5) // normalize for high refresh rate
       lastFrameTime = currentTime
 
@@ -71,13 +71,13 @@ const SkillsSection = () => {
   }, [getLoopWidth])
 
   // Pointer / Touch / Drag Event Handlers
-  const handlePointerDown = (e) => {
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     // Only handle primary button
     if (e.button !== undefined && e.button !== 0) return
 
     isDraggingRef.current = true
     setIsCursorGrabbing(true)
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0
+    const clientX = e.clientX || 0
     startXRef.current = clientX
     lastXRef.current = clientX
     lastTimeRef.current = performance.now()
@@ -88,10 +88,10 @@ const SkillsSection = () => {
     }
   }
 
-  const handlePointerMove = (e) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDraggingRef.current) return
 
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0
+    const clientX = e.clientX || 0
     const now = performance.now()
     const dt = Math.max(now - lastTimeRef.current, 8)
     const deltaX = clientX - lastXRef.current
@@ -116,7 +116,7 @@ const SkillsSection = () => {
     lastTimeRef.current = now
   }
 
-  const handlePointerUp = (e) => {
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDraggingRef.current) return
     isDraggingRef.current = false
     setIsCursorGrabbing(false)

@@ -3,12 +3,24 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { contact } from '../../data/contact'
 import { useIntro } from '../context/IntroContext'
 
-export default function IntroAnimation({ onComplete }) {
-  const [displayedText, setDisplayedText] = useState('')
-  const [phase, setPhase] = useState('typing') // 'typing' | 'pausing' | 'shifting' | 'done'
-  const [dockOffset, setDockOffset] = useState({ x: 0, y: -260, scale: 0.38 })
+export interface IntroAnimationProps {
+  onComplete?: () => void
+}
+
+type AnimationPhase = 'typing' | 'pausing' | 'shifting' | 'done'
+
+interface DockOffset {
+  x: number
+  y: number
+  scale: number
+}
+
+export default function IntroAnimation({ onComplete }: IntroAnimationProps): React.JSX.Element | null {
+  const [displayedText, setDisplayedText] = useState<string>('')
+  const [phase, setPhase] = useState<AnimationPhase>('typing') // 'typing' | 'pausing' | 'shifting' | 'done'
+  const [dockOffset, setDockOffset] = useState<DockOffset>({ x: 0, y: -260, scale: 0.38 })
   const { setIntroPhase } = useIntro()
-  const centerRef = useRef(null)
+  const centerRef = useRef<HTMLDivElement | null>(null)
   const fullName = contact.name || 'Sanyam Mujavadia'
 
   // Ensure page is pinned to top and scroll is locked while intro is active

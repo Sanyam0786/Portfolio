@@ -1,4 +1,4 @@
-export const featuresSentences = [
+export const featuresSentences: string[] = [
   "I build delightful mobile experiences.",
   "React Native & performance obsessed.",
   "Crafting polished interactions that users love.",

@@ -97,10 +97,13 @@ export default function ProjectDetail() {
   // Convention: images[0] = cover (portrait/landscape), images[1..] = mobile screenshots
   const coverImage = project.coverImage || (project.images && project.images[0])
   const screenshots = project.screenshots || (project.images && project.images.length > 1 ? project.images.slice(1) : [])
+  const store = typeof project.demo?.store === 'object' ? project.demo.store : null
+  const iosUrl = store?.ios
+  const androidUrl = store?.android
   const hasAnyLinks = Boolean(
     project.demo?.web ||
-    project.demo?.store?.ios ||
-    project.demo?.store?.android ||
+    iosUrl ||
+    androidUrl ||
     project.github
   )
 
@@ -424,9 +427,9 @@ export default function ProjectDetail() {
               )}
 
               {/* App Store */}
-              {project.demo?.store?.ios && (
+              {iosUrl && (
                 <motion.a
-                  href={project.demo.store.ios}
+                  href={iosUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02, y: -2 }}
@@ -444,9 +447,9 @@ export default function ProjectDetail() {
               )}
 
               {/* Play Store */}
-              {project.demo?.store?.android && (
+              {androidUrl && (
                 <motion.a
-                  href={project.demo.store.android}
+                  href={androidUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02, y: -2 }}
