@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { contact } from '../../data/contact'
+import { contact } from '../../../data/contact'
 
 export default function FreelanceBanner() {
   return (

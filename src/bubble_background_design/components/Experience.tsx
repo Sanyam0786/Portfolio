@@ -1,5 +1,5 @@
 import React from 'react'
-import { experience } from '../../data/experience'
+import { experience } from '../../../data/experience'
 import { motion } from 'framer-motion'
 
 const container = { show: { transition: { staggerChildren: 0.12 } } }

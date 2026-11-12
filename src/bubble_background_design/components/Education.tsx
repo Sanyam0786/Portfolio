@@ -1,5 +1,5 @@
 import React from 'react'
-import { education } from '../../data/education'
+import { education } from '../../../data/education'
 import { motion } from 'framer-motion'
 
 const container = {

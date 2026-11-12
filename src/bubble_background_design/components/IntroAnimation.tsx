@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { contact } from '../../data/contact'
+import { contact } from '../../../data/contact'
 import { useIntro } from '../context/IntroContext'
 
 export interface IntroAnimationProps {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { projects } from '../../data/projects'
+import { projects } from '../../../data/projects'
 import ProjectCard from './ProjectCard'
 import { motion } from 'framer-motion'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { contact } from '../../data/contact'
+import { contact } from '../../../data/contact'
 
 export default function Contact(){
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { projects } from '../../data/projects'
+import { projects } from '../../../data/projects'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Users, Zap, Calendar, ExternalLink, FolderX, Sun, Moon } from 'lucide-react'
 import { FiGithub } from 'react-icons/fi'

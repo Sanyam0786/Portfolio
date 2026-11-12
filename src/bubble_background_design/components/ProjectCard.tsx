@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ProjectItem } from '../types'
+import { ProjectItem } from '../../types'
 
 export interface ProjectCardProps {
   project: ProjectItem

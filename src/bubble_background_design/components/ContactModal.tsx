@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { FaWhatsapp, FaLinkedinIn, FaGithub } from 'react-icons/fa'
-import { contact } from '../../data/contact'
+import { contact } from '../../../data/contact'
 
 export interface ContactModalProps {
   isOpen: boolean

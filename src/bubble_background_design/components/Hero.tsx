@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { featuresSentences } from '../../data/home'
+import { featuresSentences } from '../../../data/home'
 
 export interface HeroProps {
   onContactOpen?: () => void

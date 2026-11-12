@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { skills } from '../../data/skills'
+import { skills } from '../../../data/skills'
 
 const SkillsSection = (): React.JSX.Element => {
   const containerRef = useRef<HTMLDivElement | null>(null)

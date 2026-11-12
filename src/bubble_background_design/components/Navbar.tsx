@@ -5,7 +5,7 @@ import ContactModal from './ContactModal'
 import { useTheme } from '../context/ThemeContext'
 import { useIntro } from '../context/IntroContext'
 import { Sun, Moon } from 'lucide-react'
-import { contact } from '../../data/contact'
+import { contact } from '../../../data/contact'
 
 const navLinks = [
   { label: 'Home', href: '#hero' },

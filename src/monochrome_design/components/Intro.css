@@ -1,0 +1,147 @@
+/* Full-screen pure black (#000) overlay */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+/* While fading out (0.45s), allow clicks through */
+.intro-overlay.is-exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Center stage container */
+.intro-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+/* Stacked copies of the content in a CSS grid */
+.intro-content-grid {
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.intro-content-base,
+.intro-content-reveal {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+}
+
+/* Base copy: rendered in center in pure black (#000) matching background */
+.intro-content-base {
+  color: #000;
+}
+
+.intro-content-base .intro-subtext {
+  color: #000;
+  opacity: 1;
+}
+
+/* White copy: revealed from center outward via circular clip-path with wave shimmer */
+.intro-content-reveal {
+  color: #fff;
+  clip-path: circle(0% at 50% 50%);
+  animation: intro-circle-reveal 1.8s cubic-bezier(0.25, 1, 0.5, 1) 0.8s forwards,
+             intro-name-wave-glow 1.8s cubic-bezier(0.25, 1, 0.5, 1) 0.8s forwards;
+}
+
+/* Name heading */
+.intro-name {
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(2rem, 5.5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Subtext: PORTFOLIO */
+.intro-subtext {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: clamp(0.7rem, 1.4vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  margin: 0.85rem 0 0 0.45em;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+/* Falling drop: 14px white circle with soft glow */
+.intro-drop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 16px 4px rgba(255, 255, 255, 0.65), 0 0 4px 1px rgba(255, 255, 255, 0.95);
+  pointer-events: none;
+  z-index: 20;
+  animation: intro-drop-fall 0.8s cubic-bezier(0.45, 0, 0.85, 1) forwards;
+}
+
+/* Drop keyframe: falling vertically stretched, then disappears with a tiny scale-up on landing */
+@keyframes intro-drop-fall {
+  0% {
+    transform: translate3d(-50%, -100vh, 0) scaleX(0.85) scaleY(1.35);
+    opacity: 1;
+  }
+  92% {
+    transform: translate3d(-50%, -50%, 0) scaleX(0.9) scaleY(1.2);
+    opacity: 1;
+  }
+  96% {
+    transform: translate3d(-50%, -50%, 0) scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Circular reveal keyframe: starts at 0.8s delay when drop lands */
+@keyframes intro-circle-reveal {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(120% at 50% 50%);
+  }
+}
+
+/* Wave crest glow washing across the name during the spread */
+@keyframes intro-name-wave-glow {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+  30% {
+    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.35));
+  }
+  70% {
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.45));
+  }
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+}

@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { FaWhatsapp, FaLinkedinIn, FaGithub } from 'react-icons/fa'
-import { contact } from '../../data/contact'
+import { contact } from '../../../data/contact'
 
 interface FormState {
   name: string
