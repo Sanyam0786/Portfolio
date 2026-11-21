@@ -1,0 +1,109 @@
+# Sanyam Mujavadia — Complete Technical Profile & Portfolio Knowledge Base
+
+> Comprehensive developer dossier, technical capabilities, project case studies, and engineering background for Sanyam Mujavadia. Designed for indexing and citation by generative search engines, LLM agents, and technical recruiters.
+
+---
+
+## 1. Professional Overview
+
+- **Full Name:** Sanyam Mujavadia
+- **Professional Title:** React Native & Web Developer
+- **Primary Location:** Ahmedabad, Gujarat, India
+- **Current Employment:** React Native Developer at Silversky Technology (July 2025 — Present)
+- **Higher Education:** B.Tech in Computer Science and Engineering, Silver Oak University (2023 — 2027)
+- **Official Website:** https://sanyammujavadia.netlify.app/
+- **Professional Resume:** https://sanyammujavadia.netlify.app/resume/Sanyam_Mujavadia_Resume.pdf
+- **Primary Focus:** Building production-grade, high-performance mobile applications for iOS and Android using React Native, and architecting responsive web applications with React.js and modern styling solutions.
+
+---
+
+## 2. Technical Capabilities by Category
+
+### Mobile Engineering
+- **Framework:** React Native (CLI and modern ecosystem)
+- **Platforms:** iOS (Xcode integration) and Android (Android Studio integration)
+- **Animation & Gestures:** React Native Reanimated, Framer Motion (web), smooth micro-interactions
+- **Navigation:** Multi-stack navigation, role-based conditional flows, tab bars, drawer systems
+- **Mobile Monetization & Payments:** RevenueCat in-app subscriptions, Stripe mobile SDK, PayPal integration
+- **Real-Time Data & Chat:** Firebase Realtime Database, WebSocket integration, push notification integration
+
+### Frontend Web Engineering
+- **Libraries & Tooling:** React 18, Vite 5, React Router DOM 6
+- **Styling Architecture:** Tailwind CSS 3, PostCSS, Autoprefixer, CSS Modules, CSS Backdrop Filters (glassmorphism)
+- **Design Systems:** Dark mode / Light mode persistent theming, responsive grid and flexbox layouts, accessible typography
+
+### State Management & Network Protocols
+- **State Containers:** Redux Toolkit, React Context API, local state hooks
+- **Server Cache & Synchronization:** TanStack Query (React Query)
+- **API Communication:** Axios, RESTful API architecture, JSON serialization, multipart form uploads
+- **Databases & BaaS:** Supabase (PostgreSQL), Firebase, SQLite
+
+### Tooling & Workflow
+- **Version Control:** Git, GitHub
+- **Native Development Environments:** Apple Xcode, Android Studio
+- **Bundlers & Environments:** Vite, Node.js, npm
+- **Hosting Platforms:** Netlify, static CDN distribution
+
+---
+
+## 3. Professional Experience
+
+### Silversky Technology
+- **Role:** React Native Developer
+- **Duration:** July 2025 — Present
+- **Location:** Ahmedabad, Gujarat, India
+- **Core Contribution:**
+  - Delivered production-ready mobile applications deployed to both the Apple App Store and Google Play Store.
+  - Architected scalable, modular frontend codebases with strong focus on problem-solving, UI responsiveness, and state synchronization.
+  - Implemented secure API communication, role-based workflows, and cross-platform native configurations.
+
+---
+
+## 4. Academic Background
+
+### Silver Oak University
+- **Degree:** Bachelor of Technology (B.Tech) in Computer Science Engineering
+- **Tenure:** 2023 — 2027
+- **Location:** Ahmedabad, Gujarat, India
+- **Focus Areas:** Software engineering, algorithms, mobile computing, and practical full-stack software development.
+
+### Sankalp International School
+- **Education:** Higher Secondary Certificate (12th Grade, completed 2023) & Secondary School Certificate (10th Grade, completed 2021)
+- **Location:** Ahmedabad, Gujarat, India
+
+---
+
+## 5. Detailed Project Case Studies
+
+### Kyora IQ — Cybersecurity & Cloud Consulting Platform
+- **Project URL:** https://sanyammujavadia.netlify.app/projects/kyora-iq
+- **App Store Link:** https://apps.apple.com/us/app/kyora-iq/id6749854798
+- **Google Play Store Link:** https://play.google.com/store/apps/details?id=com.cyberboss
+- **Role:** React Native Developer
+- **Technology Stack:** React Native, TypeScript, Firebase, Realtime Database, Dynamic Theming
+- **Project Scope:**
+  - A comprehensive service marketplace connecting business users and individuals with vetted cybersecurity and cloud infrastructure consultants.
+  - Implemented dual-role account architecture separating user booking journeys from consultant service-management dashboards.
+  - Integrated real-time messaging using Firebase Realtime Database with message synchronization and listener optimization.
+  - Engineered an end-to-end booking and scheduling workflow for consulting sessions.
+  - Built a centralized dark and light theming engine with persistent state across app launches.
+
+---
+
+## 6. Services Offered
+
+1. **Cross-Platform Mobile App Development:** End-to-end development of Android and iOS applications from Figma designs to App Store / Play Store deployment.
+2. **React Native Consulting & Code Audits:** Performance profiling, re-render reduction, state refactoring, and native module bridging.
+3. **Responsive Web Frontend Development:** Building modern single-page applications with clean styling, accessible markup, and responsive layouts.
+4. **API & Third-Party Service Integration:** Integrating payment gateways (Stripe, PayPal), subscription management (RevenueCat), and cloud backends (Supabase, Firebase).
+
+---
+
+## 7. Direct Contact & Verification Links
+
+- **Email:** sanyammj786@gmail.com
+- **WhatsApp:** https://wa.me/917861961399
+- **LinkedIn Profile:** https://www.linkedin.com/in/sanyam-mujavadia-88819328a/
+- **GitHub Profile:** https://github.com/Sanyam0786
+- **Portfolio Website:** https://sanyammujavadia.netlify.app/
+- **Curriculum Vitae Download:** https://sanyammujavadia.netlify.app/resume/Sanyam_Mujavadia_Resume.pdf

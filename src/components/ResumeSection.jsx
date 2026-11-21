@@ -32,7 +32,7 @@ export default function ResumeSection() {
           >
             {/* Section Heading aligned beside top of preview */}
             <div className="mb-6">
-              <h3 className="section-title heading-gradient">Resume</h3>
+              <h2 className="section-title heading-gradient">Resume</h2>
               <motion.div 
                 className="fancy-underline mt-2" 
                 initial={{ scaleX: 0 }} 
@@ -118,7 +118,10 @@ export default function ResumeSection() {
                   src={resumePreviewPath}
                   alt="Sanyam Mujavadia Resume"
                   className="w-full h-auto block select-none"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
+                  width="700"
+                  height="990"
                 />
               </a>
             </motion.div>

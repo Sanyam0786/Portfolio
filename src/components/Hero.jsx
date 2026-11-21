@@ -37,6 +37,14 @@ export default function Hero({ onContactOpen }) {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.2, 0.9, 0.2, 1] }}
         >
+          {/* Eyebrow / Professional identity */}
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Sanyam Mujavadia — React Native & Web Developer
+            </span>
+          </div>
+
           {/* Cycling headline with premium animations */}
           <div className="relative h-24 sm:h-32 mb-2 flex items-center">
             <AnimatePresence mode="wait" custom={1}>
@@ -81,7 +89,7 @@ export default function Hero({ onContactOpen }) {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 0.9, 0.2, 1] }}
             className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl"
           >
-            React Native specialist focused on performant apps and polished interactions. Currently full-time and available for selective remote freelance work.
+            React Native & Frontend Developer based in Ahmedabad, Gujarat, India. Specializing in high-performance iOS, Android, and web applications with polished interactions. Full-time developer open to selective remote freelance work.
           </motion.p>
 
           {/* CTA Button with hover effect */}

@@ -27,7 +27,7 @@ export default function Education() {
     <section className="py-20 bg-slate-50 dark:bg-slate-900" aria-label="education" id="education">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={titleVariants}>
-          <h3 className="section-title heading-gradient">Education</h3>
+          <h2 className="section-title heading-gradient">Education</h2>
         </motion.div>
         <motion.div className="fancy-underline mt-3" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} style={{ transformOrigin: 'left' }} />
         <motion.p className="section-subtitle" variants={subtitleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Academic background and focused coursework.</motion.p>

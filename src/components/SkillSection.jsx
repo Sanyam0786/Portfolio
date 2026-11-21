@@ -142,7 +142,7 @@ const SkillsSection = () => {
   }
 
   return (
-    <section className="py-20 bg-white dark:bg-slate-900 transition-colors duration-300 overflow-hidden" aria-label="skills" id="skills">
+    <section className="py-20 bg-white dark:bg-slate-900 transition-colors duration-300 overflow-hidden" aria-label="Technical skills" id="skills">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -179,6 +179,9 @@ const SkillsSection = () => {
               className={`flex gap-4 will-change-transform py-4 ${isCursorGrabbing ? 'cursor-grabbing' : 'cursor-grab'
                 }`}
               style={{ touchAction: 'pan-y' }}
+              role="region"
+              aria-roledescription="carousel"
+              aria-label="Technical skills carousel"
             >
               {displaySkills.map((skill, idx) => (
                 <div
@@ -194,9 +197,12 @@ const SkillsSection = () => {
                     <div className="text-4xl group-hover:scale-110 transition-transform duration-300 flex items-center justify-center pointer-events-none">
                       <img
                         src={skill.icon}
-                        alt={skill.name}
+                        alt={`${skill.name} technology icon`}
                         className="w-12 h-12 object-contain pointer-events-none transition-all duration-300 dark:brightness-0 dark:invert"
                         loading="lazy"
+                        decoding="async"
+                        width="48"
+                        height="48"
                         draggable={false}
                       />
                     </div>

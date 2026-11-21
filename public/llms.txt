@@ -1,0 +1,41 @@
+# Sanyam Mujavadia — Developer Profile
+
+> React Native & Frontend Developer based in Ahmedabad, Gujarat, India. Specializing in high-performance iOS, Android, and web applications.
+
+## Professional Identity
+- **Name:** Sanyam Mujavadia
+- **Title:** React Native & Web Developer
+- **Location:** Ahmedabad, Gujarat, India
+- **Current Role:** React Native Developer at Silversky Technology (Jul 2025 — Present)
+- **Education:** B.Tech in Computer Science Engineering, Silver Oak University (2023 — 2027)
+- **Portfolio Website:** https://sanyammujavadia.netlify.app/
+- **Availability:** Full-time developer; open to selective remote freelance and contract opportunities.
+
+## Core Specializations
+- **Mobile Development:** Cross-platform iOS and Android applications using React Native.
+- **Frontend Web Development:** Scalable single-page applications using React.js and modern JavaScript.
+- **Real-Time Systems:** Live chat, real-time sync, and notification flows using Firebase and WebSockets.
+- **Mobile Architecture:** Role-based access control, dark/light dynamic theming, and responsive layouts.
+- **State & Data Management:** Redux Toolkit, TanStack Query, Axios, REST APIs, and Supabase.
+
+## Key Projects
+- **Kyora IQ (React Native):** Service marketplace app connecting users with cybersecurity and cloud consulting experts. Features real-time messaging, appointment booking workflows, dual user/consultant roles, and dynamic theming.
+  - Case Study: https://sanyammujavadia.netlify.app/projects/kyora-iq
+  - iOS App Store: https://apps.apple.com/us/app/kyora-iq/id6749854798
+  - Google Play Store: https://play.google.com/store/apps/details?id=com.cyberboss
+
+## Verified Technical Skills
+- **Core Languages & Runtimes:** JavaScript (ES6+), TypeScript, HTML5, CSS3
+- **Frameworks & Libraries:** React Native, React.js, Tailwind CSS, Framer Motion, Reanimated
+- **State Management & Data Fetching:** Redux, Redux Toolkit, TanStack Query, Axios
+- **Backend & Cloud Services:** Firebase Realtime Database, Supabase, REST APIs
+- **Payments & Subscriptions:** Stripe, PayPal, RevenueCat
+- **Development & Build Tooling:** Xcode, Android Studio, Git, GitHub, Vite
+
+## Important Links & Resources
+- **Portfolio Homepage:** https://sanyammujavadia.netlify.app/
+- **Curriculum Vitae (PDF):** https://sanyammujavadia.netlify.app/resume/Sanyam_Mujavadia_Resume.pdf
+- **GitHub:** https://github.com/Sanyam0786
+- **LinkedIn:** https://www.linkedin.com/in/sanyam-mujavadia-88819328a/
+- **Email:** mailto:sanyammj786@gmail.com
+- **WhatsApp Direct:** https://wa.me/917861961399

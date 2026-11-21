@@ -204,6 +204,9 @@ export default function ProjectDetail() {
               src={coverImage}
               alt={`${project.title} cover preview`}
               className="w-full object-cover max-h-[500px] hover:scale-[1.01] transition-transform duration-500"
+              decoding="async"
+              width="1023"
+              height="500"
             />
           </motion.div>
         ) : (
@@ -313,6 +316,10 @@ export default function ProjectDetail() {
                             alt={`${project.title} app screenshot ${idx + 1}`}
                             className="w-full object-cover"
                             style={{ aspectRatio: '9/19.5' }}
+                            loading="lazy"
+                            decoding="async"
+                            width="640"
+                            height="1386"
                           />
                         </div>
                       </div>

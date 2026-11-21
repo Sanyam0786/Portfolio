@@ -10,18 +10,53 @@ export default function ContactModal({ isOpen, onClose }) {
   const [status, setStatus] = useState('idle') // idle | sending | success
   const formRef = useRef(null)
   const firstInputRef = useRef(null)
+  const modalRef = useRef(null)
+  const previousFocusRef = useRef(null)
 
-  // Close on Escape key
+  // Track previous focus and manage focus restoration
   useEffect(() => {
-    const handler = (e) => { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [onClose])
-
-  // Focus first input when modal opens
-  useEffect(() => {
-    if (isOpen) setTimeout(() => firstInputRef.current?.focus(), 200)
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement
+      setTimeout(() => firstInputRef.current?.focus(), 200)
+    } else if (previousFocusRef.current) {
+      previousFocusRef.current.focus?.()
+    }
   }, [isOpen])
+
+  // Close on Escape key and trap keyboard Tab focus inside modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isOpen) return
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusables = modalRef.current.querySelectorAll(
+          'button, [href], input, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusables.length === 0) return
+        const firstEl = focusables[0]
+        const lastEl = focusables[focusables.length - 1]
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstEl) {
+            e.preventDefault()
+            lastEl.focus()
+          }
+        } else {
+          if (document.activeElement === lastEl) {
+            e.preventDefault()
+            firstEl.focus()
+          }
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, onClose])
 
   // Lock body scroll when open
   useEffect(() => {
@@ -87,7 +122,7 @@ export default function ContactModal({ isOpen, onClose }) {
             onClick={onClose}
           />
 
-          {/* Modal */}
+          {/* Modal Dialog */}
           <motion.div
             key="modal"
             initial={{ opacity: 0, scale: 0.93, y: 16 }}
@@ -97,6 +132,10 @@ export default function ContactModal({ isOpen, onClose }) {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
           >
             <div
+              ref={modalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="contact-modal-title"
               className="w-full max-w-md glass rounded-2xl shadow-2xl pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
             >
@@ -104,12 +143,12 @@ export default function ContactModal({ isOpen, onClose }) {
               <div className="flex items-start justify-between p-6 pb-4">
                 <div className="flex items-center gap-3">
                   <motion.span
-                    className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block flex-shrink-0"
+                    className="w-2.5 h-2.5 rounded-full bg-slate-700 dark:bg-slate-300 inline-block flex-shrink-0"
                     animate={{ scale: [1, 1.25, 1] }}
                     transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                   />
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
+                    <h2 id="contact-modal-title" className="text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
                       Let's work together
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{contact.name} · {contact.role}</p>
@@ -118,7 +157,7 @@ export default function ContactModal({ isOpen, onClose }) {
                 <button
                   onClick={onClose}
                   className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-600 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors flex-shrink-0 ml-3"
-                  aria-label="Close"
+                  aria-label="Close contact dialog"
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                     <line x1="3" y1="3" x2="11" y2="11" /><line x1="11" y1="3" x2="3" y2="11" />
@@ -164,46 +203,56 @@ export default function ContactModal({ isOpen, onClose }) {
                 ))}
               </div>
 
-
-
               <div className="mx-6 h-px bg-slate-200/80 dark:bg-slate-700 mb-5" />
 
               {/* Form */}
               <form ref={formRef} onSubmit={handleSubmit} className="px-6 pb-6">
                 <div className="grid grid-cols-2 gap-3 mb-3">
                   <div>
+                    <label htmlFor="modal-name" className="sr-only">Your name</label>
                     <input
+                      id="modal-name"
                       ref={firstInputRef}
                       name="name"
                       value={state.name}
                       onChange={handleChange}
                       placeholder="Your name"
+                      aria-invalid={Boolean(errors.name)}
+                      aria-describedby={errors.name ? "modal-name-error" : undefined}
                       className={inputClass('name')}
                     />
-                    {errors.name && <p className="text-xs text-rose-500 mt-1">{errors.name}</p>}
+                    {errors.name && <p id="modal-name-error" className="text-xs text-rose-500 mt-1">{errors.name}</p>}
                   </div>
                   <div>
+                    <label htmlFor="modal-email" className="sr-only">Email address</label>
                     <input
+                      id="modal-email"
                       name="email"
                       type="email"
                       value={state.email}
                       onChange={handleChange}
                       placeholder="Email address"
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "modal-email-error" : undefined}
                       className={inputClass('email')}
                     />
-                    {errors.email && <p className="text-xs text-rose-500 mt-1">{errors.email}</p>}
+                    {errors.email && <p id="modal-email-error" className="text-xs text-rose-500 mt-1">{errors.email}</p>}
                   </div>
                 </div>
                 <div className="mb-4">
+                  <label htmlFor="modal-message" className="sr-only">Project details or message</label>
                   <textarea
+                    id="modal-message"
                     name="message"
                     value={state.message}
                     onChange={handleChange}
                     rows={4}
                     placeholder="Tell me about your project..."
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? "modal-message-error" : undefined}
                     className={`${inputClass('message')} resize-none`}
                   />
-                  {errors.message && <p className="text-xs text-rose-500 mt-1">{errors.message}</p>}
+                  {errors.message && <p id="modal-message-error" className="text-xs text-rose-500 mt-1">{errors.message}</p>}
                 </div>
 
                 <div className="flex items-center justify-between">

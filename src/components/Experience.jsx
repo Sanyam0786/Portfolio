@@ -12,7 +12,7 @@ export default function Experience(){
     <section className="py-20" aria-label="experience" id="experience">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={titleVariants}>
-          <h3 className="section-title heading-gradient">Experience</h3>
+          <h2 className="section-title heading-gradient">Experience</h2>
         </motion.div>
         <motion.div className="fancy-underline mt-3" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} style={{ transformOrigin: 'left' }}/>
         <motion.p className="section-subtitle" variants={subtitleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Professional timeline — role, impact, and highlights.</motion.p>
