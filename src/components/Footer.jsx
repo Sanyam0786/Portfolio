@@ -71,7 +71,7 @@ export default function Footer() {
                 <div className="w-3 h-3 rounded-full bg-accent inline-block" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold">{contact.name}</h2>
+                <div className="text-lg font-semibold">{contact.name}</div>
                 <div className="text-sm opacity-80">{`Open for freelance & remote work`}</div>
               </div>
             </div>
@@ -107,52 +107,23 @@ export default function Footer() {
           </div>
 
           {/* Right: contact form */}
-          <form action={contact.formspree} ref={formRef} onSubmit={handleSubmit} className="bg-transparent" aria-label="Contact form">
+          <form action={contact.formspree} ref={formRef} onSubmit={handleSubmit} className="bg-transparent">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="footer-name" className="sr-only">Name</label>
-                <input
-                  id="footer-name"
-                  name="name"
-                  value={state.name}
-                  onChange={handleChange}
-                  aria-invalid={Boolean(errors.name)}
-                  aria-describedby={errors.name ? "footer-name-error" : undefined}
-                  className={`w-full rounded-lg py-2 px-3 bg-white/6 dark:bg-slate-700/40 border border-white/6 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-400 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-accent transition`}
-                  placeholder="Name"
-                />
-                {errors.name && <div id="footer-name-error" className="text-xs text-rose-500 mt-1">{errors.name}</div>}
+                <label className="sr-only">Name</label>
+                <input name="name" value={state.name} onChange={handleChange} className={`w-full rounded-lg py-2 px-3 bg-white/6 dark:bg-slate-700/40 border border-white/6 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-400 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-accent transition`} placeholder="Name" />
+                {errors.name && <div className="text-xs text-rose-500 mt-1">{errors.name}</div>}
               </div>
               <div>
-                <label htmlFor="footer-email" className="sr-only">Email</label>
-                <input
-                  id="footer-email"
-                  name="email"
-                  type="email"
-                  value={state.email}
-                  onChange={handleChange}
-                  aria-invalid={Boolean(errors.email)}
-                  aria-describedby={errors.email ? "footer-email-error" : undefined}
-                  className={`w-full rounded-lg py-2 px-3 bg-white/6 dark:bg-slate-700/40 border border-white/6 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-400 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-accent transition`}
-                  placeholder="Email"
-                />
-                {errors.email && <div id="footer-email-error" className="text-xs text-rose-500 mt-1">{errors.email}</div>}
+                <label className="sr-only">Email</label>
+                <input name="email" value={state.email} onChange={handleChange} className={`w-full rounded-lg py-2 px-3 bg-white/6 dark:bg-slate-700/40 border border-white/6 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-400 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-accent transition`} placeholder="Email" />
+                {errors.email && <div className="text-xs text-rose-500 mt-1">{errors.email}</div>}
               </div>
             </div>
             <div className="mt-3">
-              <label htmlFor="footer-message" className="sr-only">Message</label>
-              <textarea
-                id="footer-message"
-                name="message"
-                value={state.message}
-                onChange={handleChange}
-                rows={4}
-                aria-invalid={Boolean(errors.message)}
-                aria-describedby={errors.message ? "footer-message-error" : undefined}
-                className={`w-full rounded-lg py-2 px-3 bg-white/6 dark:bg-slate-700/40 border border-white/6 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-400 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-accent transition`}
-                placeholder="Message"
-              />
-              {errors.message && <div id="footer-message-error" className="text-xs text-rose-500 mt-1">{errors.message}</div>}
+              <label className="sr-only">Message</label>
+              <textarea name="message" value={state.message} onChange={handleChange} rows={4} className={`w-full rounded-lg py-2 px-3 bg-white/6 dark:bg-slate-700/40 border border-white/6 dark:border-slate-600 placeholder-slate-500 dark:placeholder-slate-400 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-accent transition`} placeholder="Message"></textarea>
+              {errors.message && <div className="text-xs text-rose-500 mt-1">{errors.message}</div>}
             </div>
 
             <div className="mt-4 flex items-center gap-4">

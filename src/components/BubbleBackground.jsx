@@ -50,8 +50,6 @@ export default function BubbleBackground({ maxBubbles = 28, isDark = false }) {
     let height = 0
     const DPR = Math.max(1, window.devicePixelRatio || 1)
 
-    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
     function resize() {
       width = window.innerWidth
       height = window.innerHeight
@@ -60,7 +58,8 @@ export default function BubbleBackground({ maxBubbles = 28, isDark = false }) {
       canvas.style.width = width + 'px'
       canvas.style.height = height + 'px'
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0)
-      if (prefersReducedMotion) step()
+      // NOTE: do NOT reinitialize bubbles on resize — keep positions stable
+      // Canvas size is updated; bubbles keep their positions until a full reload
     }
 
     // Colour constants are now read from colorsRef.current (set by the isDark effect above)
@@ -185,9 +184,7 @@ export default function BubbleBackground({ maxBubbles = 28, isDark = false }) {
       p.vx *= 0.92
       p.vy *= 0.92
 
-      if (!prefersReducedMotion) {
-        rafRef.current = requestAnimationFrame(step)
-      }
+      rafRef.current = requestAnimationFrame(step)
     }
 
     // pointer handlers

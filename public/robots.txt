@@ -1,31 +1,4 @@
-# Robots.txt for https://sanyammujavadia.netlify.app/
-# Configured to permit indexing by major search engines and AI citation systems.
-
 User-agent: *
 Allow: /
 
-# Traditional Web Search Crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-# AI Citation & Generative Search Engines
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
-# XML Sitemap
 Sitemap: https://sanyammujavadia.netlify.app/sitemap.xml

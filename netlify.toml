@@ -2,13 +2,6 @@
   command = "npm run build"
   publish = "dist"
 
-# Unknown project routes return custom 404
-[[redirects]]
-  from = "/projects/*"
-  to = "/404.html"
-  status = 404
-
-# SPA fallback for root routes
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -7,6 +7,7 @@ import Education from '../components/Education'
 import ResumeSection from '../components/ResumeSection'
 import FreelanceBanner from '../components/FreelanceBanner'
 import Footer from '../components/Footer'
+import ScrollIndicator from '../components/ScrollIndicator'
 import SkillsSection from '../components/SkillSection'
 import ContactModal from '../components/ContactModal'
 

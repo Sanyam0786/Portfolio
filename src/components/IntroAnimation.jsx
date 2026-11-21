@@ -126,7 +126,7 @@ export default function IntroAnimation({ onComplete }) {
           >
 
             {/* Typed Name Heading */}
-            <div className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center whitespace-nowrap">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center whitespace-nowrap">
               <span>{displayedText}</span>
 
               {/* Blinking Cursor */}
@@ -137,7 +137,7 @@ export default function IntroAnimation({ onComplete }) {
                   className="inline-block w-[3px] sm:w-[4px] h-7 sm:h-11 md:h-14 bg-indigo-600 dark:bg-indigo-400 ml-1.5 rounded-full align-middle"
                 />
               )}
-            </div>
+            </h1>
           </motion.div>
 
           {/* Subtitle tag that fades out when shifting */}

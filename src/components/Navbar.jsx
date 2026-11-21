@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import ContactModal from './ContactModal'
 import { useTheme } from '../context/ThemeContext'
 import { useIntro } from '../context/IntroContext'
 import { Sun, Moon } from 'lucide-react'
